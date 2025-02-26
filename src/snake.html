@@ -9,13 +9,15 @@
 <body>
     <div id="gameContainer">
         <div class="game-section">
-            <div id="scoreBoard">Рейтинг: 0</div>
-            <div id="applesCounter">Яблоки: 0</div>
+            <div class="game-section-text">
+                <div id="scoreBoard">Счет: 0</div>
+                <div id="applesCounter">Яблоки: 0</div>
+            </div>
             <canvas id="gameCanvas" width="400" height="400"></canvas>
             <div id="recordMessage" style="display: none;"></div>
         </div>
         <div id="leaderboard">
-            <h3>🏆 Рейтинг</h3>
+            <h3 class="leaderboard-title">Рейтинг</h3>
             <ul id="scoreList"></ul>
             <button id="clearButton">Очистить рейтинг</button>
         </div>

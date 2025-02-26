@@ -1,7 +1,12 @@
+*{
+      margin: 0;
+      padding: 0;
+}
+
 body {
       font-family: Arial, sans-serif;
-      background-color: #222;
-      color: white;
+      background-color: #111E26;
+      color: #F2F2F2;
       margin: 0;
       padding: 0;
       display: flex;
@@ -17,8 +22,7 @@ body {
       justify-content: center;
       align-items: stretch;
       position: relative;
-      gap: 20px;
-      /* Разделяет игровое поле и рейтинг */
+      gap: 50px;
 }
 
 .game-section {
@@ -27,14 +31,19 @@ body {
       align-items: center;
 }
 
+.game-section-text {
+      padding-bottom: 20px;
+}
+
 #gameCanvas {
       background-color: black;
-      border: 2px solid white;
+      border: 2px solid #F2F2F2;
 }
 
 #scoreBoard {
+      color: #D7F205;
+      font-weight: bold;
       font-size: 24px;
-      margin-bottom: 10px;
 }
 
 #applesCounter {
@@ -45,12 +54,23 @@ body {
 #leaderboard {
       text-align: left;
       padding: 10px;
-      border: 1px solid white;
-      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid #F2F2F2;
+      background-color: #222c32;
       width: 300px;
       max-height: 70vh;
-      /* Ограничивает высоту списка */
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+}
+
+.leaderboard-title {
+      color: #D7F205;
+}
+
+#scoreList {
+      list-style: none;
 }
 
 #pauseIcon {
@@ -62,4 +82,10 @@ body {
       color: rgba(255, 255, 255, 0.7);
       z-index: 10;
       display: none;
+}
+
+#clearButton {
+      background-color: #D7F205;
+      padding: 5px;
+      border: 0;
 }
