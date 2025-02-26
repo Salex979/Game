@@ -1,0 +1,19 @@
+{
+      "manifest_version": 3,
+      "name": "Break Time Games",
+      "version": "1.0",
+      "description": "Играй в короткие игры и контролируй время отдыха",
+      "action": {
+        "default_popup": "src/popup.html",
+        "default_icon": {
+          "16": "assets/icon.png",
+          "48": "assets/icon.png",
+          "128": "assets/icon.png"
+        }
+      },
+      "permissions": ["storage", "notifications"],
+      "background": {
+        "service_worker": "src/background/background.js"
+      }
+    }
+    
