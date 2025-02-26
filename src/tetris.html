@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Тетрис</title>
-    <link rel="stylesheet" href="tetris.css"> <!-- Подключение стилей -->
+    <link rel="stylesheet" href="tetris.css"> 
 </head>
+<!--ТЕТРИС-->
 <body>
+    <div id="score">Счет: 0</div>
     <div id="game-container">
         <canvas id="tetris" width="200" height="400"></canvas>
         <div id="next-piece-container">
@@ -13,8 +15,9 @@
             <canvas id="next-piece-canvas" width="80" height="80"></canvas>
         </div>
     </div>
+    <button id="pause-button">Пауза</button>
     <div class="game-over" style="display: none;">Игра окончена!</div>
-    
-    <script src="tetris.js"></script> <!-- Подключение скрипта -->
+
+    <script src="tetris.js"></script> 
 </body>
 </html>

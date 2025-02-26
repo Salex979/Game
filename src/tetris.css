@@ -1,16 +1,24 @@
 body {
       margin: 0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       height: 100vh;
       background-color: #333;
+      color: white;
+      font-family: Arial, sans-serif;
+}
+
+#score {
+      font-size: 24px;
+      margin-bottom: 10px;
 }
 
 #game-container {
       display: flex;
-      gap: 30px;
       align-items: flex-start;
+      position: relative;
 }
 
 canvas {
@@ -18,10 +26,28 @@ canvas {
 }
 
 #next-piece-container {
+      position: absolute;
+      top: 10px;
+      right: -120px;
+      /* Увеличил отступ, чтобы не наезжало */
       padding: 10px;
       background-color: #444;
-      color: white;
       border-radius: 5px;
+      text-align: center;
+      width: 100px;
+}
+
+
+button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #555;
+      color: white;
+      border: none;
+      cursor: pointer;
 }
 
 .game-over {

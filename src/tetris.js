@@ -2,14 +2,10 @@ const canvas = document.getElementById('tetris');
 const ctx = canvas.getContext('2d');
 const nextCanvas = document.getElementById('next-piece-canvas');
 const nextCtx = nextCanvas.getContext('2d');
-const scoreDisplay = document.createElement('div');
-scoreDisplay.style.color = 'white';
-scoreDisplay.style.fontSize = '20px';
-document.body.insertBefore(scoreDisplay, document.getElementById('game-container'));
+const scoreDisplay = document.getElementById('score');
+const pauseButton = document.getElementById('pause-button');
 
-const rows = 20;
-const cols = 10;
-const cellSize = 20;
+let isPaused = false;
 let board = [];
 let currentPiece = null;
 let nextPiece = null;
@@ -17,17 +13,19 @@ let score = 0;
 let interval = null;
 let gameOver = false;
 
-const colors = ['cyan', 'yellow', 'purple', 'red', 'green', 'blue', 'orange'];
-
+const rows = 20;
+const cols = 10;
+const cellSize = 20;
 const shapes = [
-    [[1, 1, 1, 1]],       // I
-    [[1, 1], [1, 1]],     // O
-    [[1, 1, 1], [0, 1, 0]],   // T
-    [[1, 1, 0], [0, 1, 1]],   // Z
-    [[0, 1, 1], [1, 1, 0]],   // S
-    [[1, 1, 1], [0, 0, 1]],   // J
-    [[1, 1, 1], [1, 0, 0]]    // L
+    [[1, 1, 1, 1]], // I
+    [[1, 1], [1, 1]], // O
+    [[1, 1, 1], [0, 1, 0]], // T
+    [[1, 1, 0], [0, 1, 1]], // Z
+    [[0, 1, 1], [1, 1, 0]], // S
+    [[1, 1, 1], [0, 0, 1]], // J
+    [[1, 1, 1], [1, 0, 0]] // L
 ];
+const colors = ['cyan', 'yellow', 'purple', 'red', 'green', 'blue', 'orange'];
 
 function createBoard() {
     board = Array.from({ length: rows }, () => Array(cols).fill(0));
@@ -47,9 +45,9 @@ function drawBoard() {
     }));
 }
 
-function getRandomPiece() {
+function getRandomShape() {
     const index = Math.floor(Math.random() * shapes.length);
-    return { shape: shapes[index], color: colors[index], x: Math.floor(cols / 2 - 1), y: 0 };
+    return { shape: shapes[index], color: colors[index] };
 }
 
 function rotate(piece) {
@@ -57,22 +55,25 @@ function rotate(piece) {
 }
 
 function checkCollision(piece, offsetX, offsetY) {
-    return piece.shape.some((row, y) => row.some((cell, x) => {
+    return piece.some((row, y) => row.some((cell, x) => {
         if (!cell) return false;
-        let newX = piece.x + offsetX + x;
-        let newY = piece.y + offsetY + y;
+        let newX = currentPiece.x + offsetX + x;
+        let newY = currentPiece.y + offsetY + y;
         return newX < 0 || newX >= cols || newY >= rows || (newY >= 0 && board[newY][newX]);
     }));
 }
 
 function moveDown() {
-    if (checkCollision(currentPiece, 0, 1)) {
+    if (isPaused) return;
+    if (checkCollision(currentPiece.shape, 0, 1)) {
         lockPiece();
         clearLines();
         currentPiece = nextPiece;
-        nextPiece = getRandomPiece();
+        nextPiece = getRandomShape();
+        nextPiece.x = Math.floor(cols / 2 - 1);
+        nextPiece.y = 0;
         drawNextPiece();
-        if (checkCollision(currentPiece, 0, 0)) {
+        if (checkCollision(currentPiece.shape, 0, 0)) {
             gameOver = true;
             clearInterval(interval);
             document.querySelector('.game-over').style.display = 'block';
@@ -118,10 +119,21 @@ function drawNextPiece() {
     }));
 }
 
+function togglePause() {
+    isPaused = !isPaused;
+    pauseButton.textContent = isPaused ? 'Продолжить' : 'Пауза';
+}
+
+pauseButton.addEventListener('click', togglePause);
+
 function initGame() {
     createBoard();
-    currentPiece = getRandomPiece();
-    nextPiece = getRandomPiece();
+    currentPiece = getRandomShape();
+    currentPiece.x = Math.floor(cols / 2 - 1);
+    currentPiece.y = 0;
+    nextPiece = getRandomShape();
+    nextPiece.x = 0;
+    nextPiece.y = 0;
     interval = setInterval(moveDown, 500);
     document.addEventListener('keydown', handleKeyPress);
     updateScore();
@@ -130,19 +142,20 @@ function initGame() {
 }
 
 function handleKeyPress(event) {
+    if (isPaused) return;
     switch (event.keyCode) {
-        case 37:
-            if (!checkCollision(currentPiece, -1, 0)) currentPiece.x--;
+        case 37: // Left arrow
+            if (!checkCollision(currentPiece.shape, -1, 0)) currentPiece.x--;
             break;
-        case 39:
-            if (!checkCollision(currentPiece, 1, 0)) currentPiece.x++;
+        case 39: // Right arrow
+            if (!checkCollision(currentPiece.shape, 1, 0)) currentPiece.x++;
             break;
-        case 40:
+        case 40: // Down arrow
             moveDown();
             break;
-        case 38:
-            const rotated = { ...currentPiece, shape: rotate(currentPiece.shape) };
-            if (!checkCollision(rotated, 0, 0)) currentPiece.shape = rotated.shape;
+        case 38: // Up arrow (rotate)
+            let rotated = rotate(currentPiece.shape);
+            if (!checkCollision(rotated, 0, 0)) currentPiece.shape = rotated;
             break;
     }
     draw();
