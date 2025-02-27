@@ -4,6 +4,7 @@ class Game2048 {
         this.score = 0;
         this.bestScore = parseInt(localStorage.getItem('bestScore')) || 0;
         document.getElementById('best-score').textContent = this.bestScore;
+        this.setupSounds();
         this.loadGameState();
         this.setupGame();
         this.setupEventListeners();
@@ -25,6 +26,40 @@ class Game2048 {
             this.hideGameOverModal();
             this.resetGame();
         });
+    }
+
+    setupSounds() {
+        // Create a pool of move sounds for overlapping plays
+        this.moveAudioPool = Array(4).fill().map(() => {
+            const audio = new Audio('moving.mp3');
+            audio.volume = 0.3;
+            audio.load();
+            return audio;
+        });
+        
+        this.currentMoveSound = 0;
+        
+        this.sounds = {
+            gameOver: new Audio('game_over.mp3')
+        };
+        
+        this.sounds.gameOver.volume = 0.3;
+        this.sounds.gameOver.load();
+    }
+
+    playSound(soundName) {
+        if (soundName === 'move') {
+            // Use the next sound in the pool for move sounds
+            const audio = this.moveAudioPool[this.currentMoveSound];
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+            
+            // Cycle through the pool
+            this.currentMoveSound = (this.currentMoveSound + 1) % this.moveAudioPool.length;
+        } else if (this.sounds[soundName]) {
+            this.sounds[soundName].currentTime = 0;
+            this.sounds[soundName].play().catch(() => {});
+        }
     }
 
     resetGame() {
@@ -129,8 +164,10 @@ class Game2048 {
             this.updateDisplay();
             this.updateScore();
             this.saveGameState();
+            this.playSound('move');
             
             if (this.isGameOver()) {
+                this.playSound('gameOver');
                 this.showGameOverModal();
             }
         }
