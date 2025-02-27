@@ -193,7 +193,7 @@ class Game2048 {
         
         let moved = this.moveLeft();
         
-        this.grid = this.rotateGrid(this.rotateGrid(this.grid));
+        this.grid = this.rotateGrid(this.grid);
         
         return oldGrid !== JSON.stringify(this.grid);
     }
