@@ -102,7 +102,42 @@ h1 {
     align-items: center;
     background: #eee4da;
     border-radius: 3px;
-    transition: all 0.15s ease;
+    animation: appear 200ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes merge {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tile.merged {
+    animation: merge 150ms ease-in-out;
+}
+
+.tile.new {
+    animation: appear 200ms ease-in-out;
 }
 
 .tile[data-value="2"] { background: #eee4da; }

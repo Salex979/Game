@@ -110,10 +110,15 @@ class Game2048 {
             
             if (value !== 0) {
                 const tile = document.createElement('div');
-                tile.className = 'tile';
+                tile.className = 'tile new';
                 tile.textContent = value;
                 tile.dataset.value = value;
                 cell.appendChild(tile);
+                
+                // Remove the 'new' class after animation completes
+                setTimeout(() => {
+                    tile.classList.remove('new');
+                }, 200);
             }
         });
     }
@@ -134,24 +139,32 @@ class Game2048 {
             case 'ArrowUp':
             case 'w':
             case 'W':
+            case 'Ц':
+            case 'ц':
                 e.preventDefault();
                 moved = this.moveUp();
                 break;
             case 'ArrowDown':
             case 's':
             case 'S':
+            case 'Ы':
+            case 'ы':
                 e.preventDefault();
                 moved = this.moveDown();
                 break;
             case 'ArrowLeft':
             case 'a':
             case 'A':
+            case 'ф':
+            case 'Ф':
                 e.preventDefault();
                 moved = this.moveLeft();
                 break;
             case 'ArrowRight':
             case 'd':
             case 'D':
+            case 'в':
+            case 'В':
                 e.preventDefault();
                 moved = this.moveRight();
                 break;
@@ -197,6 +210,20 @@ class Game2048 {
                     this.score += grid[i][j];
                     grid[i][j + 1] = 0;
                     merged = true;
+                    
+                    // Add merge animation
+                    const cell = document.querySelector(`.grid-cell[data-row="${i}"][data-col="${j}"]`);
+                    if (cell) {
+                        const tile = cell.querySelector('.tile');
+                        if (tile) {
+                            tile.classList.add('merged');
+                            setTimeout(() => {
+                                tile.classList.remove('merged');
+                            }, 150);
+                        }
+                    }
+                    
+                    this.playSound('move');
                 }
             }
         }
