@@ -17,12 +17,28 @@ class Game2048 {
     setupEventListeners() {
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
         document.getElementById('new-game').addEventListener('click', () => this.resetGame());
+        document.getElementById('restart-game').addEventListener('click', () => {
+            this.hideGameOverModal();
+            this.resetGame();
+        });
     }
 
     resetGame() {
         this.grid = Array(4).fill().map(() => Array(4).fill(0));
         this.score = 0;
         this.setupGame();
+    }
+
+    showGameOverModal() {
+        const modal = document.getElementById('game-over-modal');
+        document.getElementById('final-score').textContent = this.score;
+        document.getElementById('final-best-score').textContent = this.bestScore;
+        modal.classList.add('active');
+    }
+
+    hideGameOverModal() {
+        const modal = document.getElementById('game-over-modal');
+        modal.classList.remove('active');
     }
 
     addNewTile() {
@@ -103,7 +119,7 @@ class Game2048 {
             this.updateScore();
             
             if (this.isGameOver()) {
-                alert('Game Over! Your score: ' + this.score);
+                this.showGameOverModal();
             }
         }
     }
