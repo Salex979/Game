@@ -63,13 +63,11 @@ class Game2048 {
             const col = parseInt(cell.dataset.col);
             const value = this.grid[row][col];
             
-            // Remove old tile
             const oldTile = cell.querySelector('.tile');
             if (oldTile) {
                 cell.removeChild(oldTile);
             }
             
-            // Add new tile if value is not 0
             if (value !== 0) {
                 const tile = document.createElement('div');
                 tile.className = 'tile';
@@ -167,13 +165,10 @@ class Game2048 {
     moveLeft() {
         let oldGrid = JSON.stringify(this.grid);
         
-        // Compress the grid
         this.grid = this.compressGrid(this.grid);
-        
-        // Merge the numbers
+
         let merged = this.mergeGrid(this.grid);
-        
-        // Compress again after merging
+
         this.grid = this.compressGrid(this.grid);
         
         return oldGrid !== JSON.stringify(this.grid);
@@ -182,13 +177,10 @@ class Game2048 {
     moveRight() {
         let oldGrid = JSON.stringify(this.grid);
         
-        // Rotate twice to reverse the grid
         this.grid = this.rotateGrid(this.rotateGrid(this.grid));
         
-        // Move left
         let moved = this.moveLeft();
         
-        // Rotate twice again to get back to original orientation
         this.grid = this.rotateGrid(this.rotateGrid(this.grid));
         
         return oldGrid !== JSON.stringify(this.grid);
@@ -197,14 +189,11 @@ class Game2048 {
     moveUp() {
         let oldGrid = JSON.stringify(this.grid);
         
-        // Rotate once counterclockwise
         this.grid = this.rotateGrid(this.rotateGrid(this.rotateGrid(this.grid)));
         
-        // Move left
         let moved = this.moveLeft();
         
-        // Rotate once clockwise
-        this.grid = this.rotateGrid(this.grid);
+        this.grid = this.rotateGrid(this.rotateGrid(this.grid));
         
         return oldGrid !== JSON.stringify(this.grid);
     }
@@ -212,27 +201,21 @@ class Game2048 {
     moveDown() {
         let oldGrid = JSON.stringify(this.grid);
         
-        // Rotate once clockwise
         this.grid = this.rotateGrid(this.grid);
         
-        // Move left
         let moved = this.moveLeft();
         
-        // Rotate three times clockwise to get back
         this.grid = this.rotateGrid(this.rotateGrid(this.rotateGrid(this.grid)));
         
         return oldGrid !== JSON.stringify(this.grid);
     }
 
     isGameOver() {
-        // Check for empty cells
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 if (this.grid[i][j] === 0) return false;
             }
         }
-
-        // Check for possible merges
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
                 const current = this.grid[i][j];
@@ -246,7 +229,6 @@ class Game2048 {
     }
 }
 
-// Start the game when the page loads
 window.addEventListener('load', () => {
     new Game2048();
 });
