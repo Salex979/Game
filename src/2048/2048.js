@@ -31,7 +31,7 @@ class Game2048 {
     setupSounds() {
         // Create a pool of move sounds for overlapping plays
         this.moveAudioPool = Array(4).fill().map(() => {
-            const audio = new Audio('moving.mp3');
+            const audio = new Audio('../../assets/sounds/moving.mp3');
             audio.volume = 0.3;
             audio.load();
             return audio;
@@ -40,7 +40,7 @@ class Game2048 {
         this.currentMoveSound = 0;
         
         this.sounds = {
-            gameOver: new Audio('game_over.mp3')
+            gameOver: new Audio('../../assets/sounds/game_over.mp3')
         };
         
         this.sounds.gameOver.volume = 0.3;
@@ -133,6 +133,19 @@ class Game2048 {
     }
 
     handleKeyPress(e) {
+        const modal = document.getElementById('game-over-modal');
+        const isGameOver = modal.classList.contains('active');
+
+        // Handle Enter key
+        if (e.key === 'Enter' && isGameOver) {
+            this.hideGameOverModal();
+            this.resetGame();
+            return;
+        }
+
+        // Don't handle movement keys if game is over
+        if (isGameOver) return;
+
         let moved = false;
         
         switch(e.key) {
