@@ -20,7 +20,7 @@ body {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      align-items: stretch;
+      align-items: center;
       position: relative;
       gap: 50px;
 }
