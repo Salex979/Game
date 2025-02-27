@@ -21,8 +21,22 @@ let isPaused = false; // Флаг для паузы
 
 // Функция для отрисовки игры
 function draw() {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Определяем размеры клетки
+    const gridSize = 20; // Например, каждая клетка имеет ширину и высоту 20 пикселей
+
+    // Проходимся по каждой строке и столбцу на холсте
+    for (let x = 0; x < canvas.width; x += gridSize) {
+        for (let y = 0; y < canvas.height; y += gridSize) {
+            // Чередование цветов
+            let color = ((x / gridSize) % 2 === 0 ^ (y / gridSize) % 2 === 0)
+                ? "#58508d" // Цвет первой клетки
+                : "#504981"; // Цвет второй клетки
+
+            // Заполняем прямоугольник цветом
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, gridSize, gridSize);
+        }
+    }
 
     // Рисуем еду
     ctx.fillStyle = "red";
@@ -30,7 +44,7 @@ function draw() {
 
     // Рисуем змейку
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = i === 0 ? "yellow" : "lime"; // Голова жёлтая, тело зелёное
+        ctx.fillStyle = i === 0 ? "#ffa600" : "#ff6361"; // Голова жёлтая, тело зелёное
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize, gridSize);
 
         // Глазки змейки
@@ -41,6 +55,7 @@ function draw() {
         }
     }
 }
+
 // Функция для переключения паузы
 function togglePause() {
       if (isPaused) {
