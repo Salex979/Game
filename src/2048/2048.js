@@ -3,13 +3,17 @@ class Game2048 {
         this.grid = Array(4).fill().map(() => Array(4).fill(0));
         this.score = 0;
         this.bestScore = parseInt(localStorage.getItem('bestScore')) || 0;
+        document.getElementById('best-score').textContent = this.bestScore;
+        this.loadGameState();
         this.setupGame();
         this.setupEventListeners();
     }
 
     setupGame() {
-        this.addNewTile();
-        this.addNewTile();
+        if (!this.loadGameState()) {
+            this.addNewTile();
+            this.addNewTile();
+        }
         this.updateDisplay();
         this.updateScore();
     }
@@ -26,6 +30,7 @@ class Game2048 {
     resetGame() {
         this.grid = Array(4).fill().map(() => Array(4).fill(0));
         this.score = 0;
+        localStorage.removeItem('gameState');
         this.setupGame();
     }
 
@@ -92,18 +97,26 @@ class Game2048 {
         
         switch(e.key) {
             case 'ArrowUp':
+            case 'w':
+            case 'W':
                 e.preventDefault();
                 moved = this.moveUp();
                 break;
             case 'ArrowDown':
+            case 's':
+            case 'S':
                 e.preventDefault();
                 moved = this.moveDown();
                 break;
             case 'ArrowLeft':
+            case 'a':
+            case 'A':
                 e.preventDefault();
                 moved = this.moveLeft();
                 break;
             case 'ArrowRight':
+            case 'd':
+            case 'D':
                 e.preventDefault();
                 moved = this.moveRight();
                 break;
@@ -115,6 +128,7 @@ class Game2048 {
             this.addNewTile();
             this.updateDisplay();
             this.updateScore();
+            this.saveGameState();
             
             if (this.isGameOver()) {
                 this.showGameOverModal();
@@ -226,6 +240,27 @@ class Game2048 {
             }
         }
         return true;
+    }
+
+    saveGameState() {
+        const gameState = {
+            grid: this.grid,
+            score: this.score,
+            bestScore: this.bestScore
+        };
+        localStorage.setItem('gameState', JSON.stringify(gameState));
+    }
+
+    loadGameState() {
+        const savedState = localStorage.getItem('gameState');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            this.grid = state.grid;
+            this.score = state.score;
+            this.bestScore = state.bestScore;
+            return true;
+        }
+        return false;
     }
 }
 
