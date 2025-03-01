@@ -212,19 +212,31 @@ function clearLeaderboard() {
 document.addEventListener("keydown", (event) => {
     switch (event.key) {
         case "ArrowUp":
-        case "w":   // Добавлено управление клавишей 'W'
+        case "w":   
+        case "W":
+        case "ц":
+        case "Ц":
             if (dy === 0) { nextDirection = { dx: 0, dy: -1 }; }
             break;
         case "ArrowDown":
-        case "s":   // Добавлено управление клавишей 'S'
+        case "s":   
+        case "S":
+        case "ы":
+        case "Ы":   
             if (dy === 0) { nextDirection = { dx: 0, dy: 1 }; }
             break;
         case "ArrowLeft":
-        case "a":   // Добавлено управление клавишей 'A'
+        case "a":   
+        case "A":
+        case "ф":
+        case "Ф":   
             if (dx === 0) { nextDirection = { dx: -1, dy: 0 }; }
             break;
         case "ArrowRight":
-        case "d":   // Добавлено управление клавишей 'D'
+        case "d":   
+        case "D":
+        case "в":
+        case "В": 
             if (dx === 0) { nextDirection = { dx: 1, dy: 0 }; }
             break;
         case "Escape":
