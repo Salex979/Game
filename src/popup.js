@@ -1,3 +1,8 @@
+document.getElementById("Start_button").addEventListener("click", function () {
+        window.open("menu.html", "_blank");
+    });
+
+
 document.getElementById("startSnake").addEventListener("click", function () {
       window.open("Snake/snake.html", "_blank");
   });
@@ -17,3 +22,4 @@ document.getElementById("start2048").addEventListener("click", function () {
 document.getElementById("startPacman").addEventListener("click", function () {
         window.open("Pacman/pacman.html", "_blank");
 });
+
