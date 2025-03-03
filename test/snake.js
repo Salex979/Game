@@ -1,5 +1,10 @@
 // snake.js
 
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('show'); // Добавляем/удаляем класс для отображения меню
+}
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -39,3 +44,4 @@ function gameLoop() {
 window.addEventListener('load', () => {
     gameLoop();
 });
+
