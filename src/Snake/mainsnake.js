@@ -131,15 +131,15 @@ function generateFood() {
 
 // Обновление счётчиков
 function updateCounters() {
-      applesCounter.innerText = "Яблоки: " + applesEaten; // Обновляем количество яблок
+      applesCounter.innerText = "Apples: " + applesEaten; // Обновляем количество яблок
       score = applesEaten * 10; // Счёт равен количеству яблок умноженному на 10
-      scoreBoard.innerText = "Рейтинг: " + score; // Обновляем рейтинг
+      scoreBoard.innerText = "Score: " + score; // Обновляем рейтинг
   
       // Проверяем, установлен ли новый рекорд
       if (score > highScore) {
           highScore = score; // Обновляем лучший результат
           localStorage.setItem("highScore", highScore); // Сохраняем новый рекорд в localStorage
-          recordMessage.textContent = "НОВЫЙ РЕКОРД! <3"; // Показываем сообщение о новом рекорде
+          recordMessage.textContent = "NEW RECORD! <3"; // Показываем сообщение о новом рекорде
           recordMessage.style.display = "block"; // Отображаем сообщение
       } else {
           recordMessage.style.display = "none"; // Скрываем сообщение, если рекорд не побит
