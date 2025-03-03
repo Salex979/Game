@@ -5,12 +5,12 @@ canvas.width = 400;
 canvas.height = 600;
 
 // Константы игры
-const GRAVITY = 0.4; // Уменьшена гравитация для более плавного полета
-const JUMP_STRENGTH = -6;
+const GRAVITY = 0.5;
+const JUMP_STRENGTH = -7;
 const PIPE_WIDTH = 60;
-const PIPE_GAP = 200; // Увеличено расстояние между трубами
+const PIPE_GAP = 200; // Увеличенное расстояние между трубами
 const BIRD_SIZE = 30;
-const PIPE_SPEED = 2; // Уменьшена скорость труб
+const PIPE_SPEED = 2; // Уменьшенная скорость игры
 const MAX_RECORDS = 5;
 
 // Переменные игры
@@ -36,7 +36,7 @@ topPipeImage.src = 'images/pipeUp.png';
 const bottomPipeImage = new Image();
 bottomPipeImage.src = 'images/pipeBottom.png';
 const backgroundImage = new Image();
-backgroundImage.src = 'images/bg.png';
+backgroundImage.src = 'images/bg.png'; // Единое изображение фона
 
 // Класс птицы
 function Bird() {
@@ -48,8 +48,10 @@ function Bird() {
     this.draw = function() {
         if (birdVelocity < 0) {
             ctx.drawImage(birdUpImage, this.x, this.y, this.width, this.height);
-        } else {
+        } else if (birdVelocity > 0) {
             ctx.drawImage(birdDownImage, this.x, this.y, this.width, this.height);
+        } else {
+            ctx.drawImage(birdMidImage, this.x, this.y, this.width, this.height);
         }
     };
 
@@ -60,7 +62,6 @@ function Bird() {
         if (this.y + this.height > canvas.height) {
             this.y = canvas.height - this.height;
             birdVelocity = 0;
-            birdAlive = false;
         }
 
         if (this.y < 0) {
@@ -81,6 +82,7 @@ function Pipe(x) {
     this.x = x;
     this.topHeight = Math.floor(Math.random() * (canvas.height / 2));
     this.bottomHeight = canvas.height - this.topHeight - PIPE_GAP;
+    this.passed = false;
 
     this.draw = function() {
         ctx.drawImage(topPipeImage, this.x, 0, PIPE_WIDTH, this.topHeight);
@@ -133,12 +135,6 @@ function togglePause() {
 
 // Функция перезапуска игры
 function restartGame() {
-    if (score > 0) {
-        highScores.push(score);
-        highScores.sort((a, b) => b - a);
-        highScores = highScores.slice(0, MAX_RECORDS);
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-    }
     birdAlive = true;
     score = 0;
     pipes = [];
@@ -149,48 +145,61 @@ function restartGame() {
     gameLoop();
 }
 
-// Функция отображения рекордов
-function displayHighScores() {
-    let recordText = "Топ 5 рекордов:\n";
-    highScores.forEach((score, index) => {
-        recordText += `${index + 1}. ${score}\n`;
+// Обновление таблицы рекордов
+function updateHighScores() {
+    highScores.push(score);
+    highScores.sort((a, b) => b - a);
+    highScores = highScores.slice(0, MAX_RECORDS);
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText('Топ 5 рекордов:', canvas.width - 160, 20);
+    highScores.forEach((record, index) => {
+        ctx.fillText(`${index + 1}. ${record}`, canvas.width - 160, 40 + index * 20);
     });
-    document.getElementById('recordText').textContent = recordText;
 }
 
 // Главный игровой цикл
 function gameLoop() {
     if (gamePaused) return;
 
-    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Единый фон
 
     if (!birdAlive) {
-        displayHighScores();
         ctx.fillStyle = 'black';
         ctx.font = '30px Arial';
         ctx.fillText('Вы проиграли!', canvas.width / 2 - 100, canvas.height / 2);
         ctx.fillText('Счет: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
+        updateHighScores();
         return;
     }
 
     bird.update();
-    if (frame % 90 === 0) {
+    if (frame % 90 === 0) { // Увеличенный интервал появления труб
         pipes.push(new Pipe(canvas.width));
     }
     pipes.forEach(function(pipe) {
         pipe.update();
+        if (!pipe.passed && pipe.x + PIPE_WIDTH < bird.x) {
+            score++;
+            pipe.passed = true;
+        }
         if (pipe.isOffScreen()) {
             pipes.shift();
-            score++;
         }
         if (pipe.collidesWithBird(bird)) {
             birdAlive = false;
         }
     });
 
+    ctx.fillStyle = 'black';
+    ctx.font = '20px Arial';
+    ctx.fillText('Счет: ' + score, 20, 30);
+    
     frame++;
     requestAnimationFrame(gameLoop);
 }
 
-displayHighScores();
+// Запуск игры
 gameLoop();
