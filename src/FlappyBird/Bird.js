@@ -6,9 +6,9 @@ canvas.height = 600;
 
 // Константы игры
 const GRAVITY = 0.5;
-const JUMP_STRENGTH = -7; // Немного увеличили высоту прыжка
+const JUMP_STRENGTH = -7;
 const PIPE_WIDTH = 60;
-const PIPE_GAP = 180; // Увеличенное расстояние между трубами
+const PIPE_GAP = 180;
 const BIRD_SIZE = 30;
 const PIPE_SPEED = 3;
 const MAX_RECORDS = 5;
@@ -27,24 +27,16 @@ let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 // Загрузка изображений
 const birdUpImage = new Image();
 birdUpImage.src = 'images/bird_up.png';
-
 const birdDownImage = new Image();
 birdDownImage.src = 'images/bird_down.png';
-
 const birdMidImage = new Image();
 birdMidImage.src = 'images/bird.png';
-
 const topPipeImage = new Image();
 topPipeImage.src = 'images/pipeUp.png';
-
 const bottomPipeImage = new Image();
 bottomPipeImage.src = 'images/pipeBottom.png';
-
-const skyImage = new Image();
-skyImage.src = 'images/bg.png';
-
-const groundImage = new Image();
-groundImage.src = 'images/fg.png';
+const backgroundImage = new Image();
+backgroundImage.src = 'images/bg.png'; // Единое изображение фона
 
 // Класс птицы
 function Bird() {
@@ -54,16 +46,11 @@ function Bird() {
     this.height = BIRD_SIZE;
 
     this.draw = function() {
-        // Если птица летит вверх
         if (birdVelocity < 0) {
             ctx.drawImage(birdUpImage, this.x, this.y, this.width, this.height);
-        }
-        // Если птица падает вниз
-        else if (birdVelocity > 0) {
+        } else if (birdVelocity > 0) {
             ctx.drawImage(birdDownImage, this.x, this.y, this.width, this.height);
-        }
-        // Если птица в горизонтальном положении
-        else {
+        } else {
             ctx.drawImage(birdMidImage, this.x, this.y, this.width, this.height);
         }
     };
@@ -72,8 +59,8 @@ function Bird() {
         birdVelocity += GRAVITY;
         this.y += birdVelocity;
 
-        if (this.y + this.height > canvas.height - 70) { // Уменьшили высоту земли
-            this.y = canvas.height - this.height - 70;
+        if (this.y + this.height > canvas.height) {
+            this.y = canvas.height - this.height;
             birdVelocity = 0;
         }
 
@@ -97,8 +84,8 @@ function Pipe(x) {
     this.bottomHeight = canvas.height - this.topHeight - PIPE_GAP;
 
     this.draw = function() {
-        ctx.drawImage(topPipeImage, this.x, 0, PIPE_WIDTH, this.topHeight); // Верхняя труба
-        ctx.drawImage(bottomPipeImage, this.x, canvas.height - this.bottomHeight - 70, PIPE_WIDTH, this.bottomHeight); // Нижняя труба с учетом уменьшенной земли
+        ctx.drawImage(topPipeImage, this.x, 0, PIPE_WIDTH, this.topHeight);
+        ctx.drawImage(bottomPipeImage, this.x, canvas.height - this.bottomHeight, PIPE_WIDTH, this.bottomHeight);
     };
 
     this.update = function() {
@@ -111,9 +98,8 @@ function Pipe(x) {
     };
 
     this.collidesWithBird = function(bird) {
-        // Проверка столкновения с верхней или нижней трубой
         if (bird.x + bird.width > this.x && bird.x < this.x + PIPE_WIDTH) {
-            if (bird.y < this.topHeight || bird.y + bird.height > canvas.height - this.bottomHeight - 70) {
+            if (bird.y < this.topHeight || bird.y + bird.height > canvas.height - this.bottomHeight) {
                 return true;
             }
         }
@@ -121,44 +107,32 @@ function Pipe(x) {
     };
 }
 
-// Создание нового объекта птицы
+// Создание птицы
 const bird = new Bird();
 
 // Обработчик нажатия клавиш
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space') {
         if (!birdAlive) {
-            restartGame();  // Перезапуск игры при нажатии Space, если игра завершена
+            restartGame();
         } else {
-            bird.jump();  // Прыжок, если игра не завершена
+            bird.jump();
         }
     }
     if (event.code === 'Escape') {
-        togglePause();  // Пауза на Escape
+        togglePause();
     }
 });
 
 // Функция для паузы игры
 function togglePause() {
     gamePaused = !gamePaused;
-    if (gamePaused) {
-        document.getElementById('pauseText').style.display = 'block';
-    } else {
-        document.getElementById('pauseText').style.display = 'none';
-        gameLoop();  // Возобновление игры
+    if (!gamePaused) {
+        gameLoop();
     }
 }
 
-// Функция для обновления и отображения рекордов
-function displayHighScores() {
-    let recordText = "Личные рекорды:\n";
-    highScores.slice(0, MAX_RECORDS).forEach((score, index) => {
-        recordText += `${index + 1}. ${score}\n`;
-    });
-    document.getElementById('recordText').textContent = recordText;
-}
-
-// Функция для перезапуска игры
+// Функция перезапуска игры
 function restartGame() {
     birdAlive = true;
     score = 0;
@@ -167,8 +141,6 @@ function restartGame() {
     bird.y = birdY;
     birdVelocity = 0;
     gamePaused = false;
-    document.getElementById('pauseText').style.display = 'none';
-    displayHighScores();
     gameLoop();
 }
 
@@ -176,24 +148,9 @@ function restartGame() {
 function gameLoop() {
     if (gamePaused) return;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Отображаем небо
-    ctx.drawImage(skyImage, 0, 0, canvas.width, canvas.height - 70); // Небо (с учетом уменьшенной земли)
-
-    // Отображаем землю
-    ctx.drawImage(groundImage, 0, canvas.height - 70, canvas.width, 70); // Земля (с уменьшенной высотой)
-
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Единый фон
+    
     if (!birdAlive) {
-        if (highScores.length < MAX_RECORDS || score > Math.min(...highScores)) {
-            highScores.push(score);
-            highScores.sort((a, b) => b - a);  // Сортировка по убыванию
-            highScores = highScores.slice(0, MAX_RECORDS);  // Оставляем только 5 лучших
-            localStorage.setItem("highScores", JSON.stringify(highScores));
-        }
-
-        displayHighScores();
-
         ctx.fillStyle = 'black';
         ctx.font = '30px Arial';
         ctx.fillText('Вы проиграли!', canvas.width / 2 - 100, canvas.height / 2);
@@ -201,10 +158,7 @@ function gameLoop() {
         return;
     }
 
-    // Обновление птицы
     bird.update();
-
-    // Обновление труб
     if (frame % 60 === 0) {
         pipes.push(new Pipe(canvas.width));
     }
@@ -219,10 +173,6 @@ function gameLoop() {
         }
     });
 
-    // Отображение счета
-    document.getElementById('scoreText').textContent = 'Счет: ' + score;
-
-    // Увеличиваем фрейм
     frame++;
     requestAnimationFrame(gameLoop);
 }
