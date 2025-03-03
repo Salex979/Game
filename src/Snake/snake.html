@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Змейка</title>
     <link rel="stylesheet" href="snake.css">
-
 </head>
-<!--ЗМЕЙКА-->
-<body>
+<body class="light-theme">
+    <!-- Бургер-меню -->
     <div class="burger-menu" onclick="toggleMenu()">
         <div class="burger-bar"></div>
         <div class="burger-bar"></div>
@@ -17,30 +16,41 @@
 
     <!-- Меню -->
     <div class="menu" id="menu">
-        <a href="#">Змейка</a>
-        <a href="#">Тетрис</a>
-        <a href="#">Понг</a>
-        <a href="#">Крестики-нолики</a>
+        <a href="#" onclick="toggleTheme()">Mode</a>
+        <a href="#">Main</a>
     </div>
 
-    <div id="gameContainer">
+    <!-- Основной контейнер -->
+    <div id="main-container">
+        <!-- Левая колонка: заметки -->
+        <div class="column note-column">
+            <h3 class="column-title">Notes</h3>
+            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
+            <button class="column-btn" onclick="addNote()">Add note</button>
+            <div class="note-list" id="note-list"></div>
+        </div>
+
+        <!-- Средняя колонка: игра -->
         <div class="game-section">
+            <h1 class="game-section-title">Zmeika</h1>
             <div class="game-section-text">
-                <div id="scoreBoard">Счет: 0</div>
-                <div id="applesCounter">Яблоки: 0</div>
+                <div id="scoreBoard">Score: 0</div>
+                <div id="applesCounter">Apples: 0</div>
             </div>
             <canvas id="gameCanvas" width="400" height="400"></canvas>
             <div id="recordMessage" style="display: none;"></div>
         </div>
-        <div id="leaderboard">
-            <h3 class="leaderboard-title">Рейтинг</h3>
+
+        <!-- Правая колонка: рейтинг -->
+        <div class="column score-column">
+            <h3 class="column-title">Rating</h3>
             <ul id="scoreList"></ul>
-            <button id="clearButton">Очистить рейтинг</button>
+            <button class="column-btn" id="clearButton">Clear rating</button>
         </div>
     </div>
 
     <script src="mainsnake.js"></script>
     <script src="snake.js"></script>
-    
+    <script src="script.js"></script>
 </body>
 </html>

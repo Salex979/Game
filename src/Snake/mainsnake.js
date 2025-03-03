@@ -12,8 +12,8 @@ const canvasSize = 400;
 
 let snake = [{ x: 10, y: 10 }]; // Начальная позиция головы змейки
 let food = generateFood(); // Первая еда
-let dx = 1, dy = 0; // Начальное направление вправо
-let nextDirection = { dx: 1, dy: 0 }; // Следующее направление (по умолчанию вправо)
+let dx = 0, dy = 0; // Начальное направление вправо
+let nextDirection = { dx: 0, dy: 0 }; // Следующее направление (по умолчанию вправо)
 let gameRunning = true; // Игра запущена
 let applesEaten = 0; // Количество съеденных яблок
 let score = 0; // Текущий счёт (яблоки * 10)
@@ -131,15 +131,15 @@ function generateFood() {
 
 // Обновление счётчиков
 function updateCounters() {
-      applesCounter.innerText = "Яблоки: " + applesEaten; // Обновляем количество яблок
+      applesCounter.innerText = "Apples " + applesEaten; // Обновляем количество яблок
       score = applesEaten * 10; // Счёт равен количеству яблок умноженному на 10
-      scoreBoard.innerText = "Рейтинг: " + score; // Обновляем рейтинг
+      scoreBoard.innerText = "Rating " + score; // Обновляем рейтинг
   
       // Проверяем, установлен ли новый рекорд
       if (score > highScore) {
           highScore = score; // Обновляем лучший результат
           localStorage.setItem("highScore", highScore); // Сохраняем новый рекорд в localStorage
-          recordMessage.textContent = "НОВЫЙ РЕКОРД! <3"; // Показываем сообщение о новом рекорде
+          recordMessage.textContent = "New Record <3"; // Показываем сообщение о новом рекорде
           recordMessage.style.display = "block"; // Отображаем сообщение
       } else {
           recordMessage.style.display = "none"; // Скрываем сообщение, если рекорд не побит
@@ -158,7 +158,7 @@ function endGame() {
 // Добавление счёта в рейтинг
 function addScoreToLeaderboard(score) {
     const listItem = document.createElement("li"); // Создаём новый элемент списка
-    listItem.textContent = `Игрок: ${score} очков`; // Выводим строку с результатом
+    listItem.textContent = `Player: ${score} points`; // Выводим строку с результатом
     scoreList.appendChild(listItem); // Добавляем результат в список лидеров
 }
 
