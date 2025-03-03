@@ -8,9 +8,9 @@ canvas.height = 600;
 const GRAVITY = 0.5;
 const JUMP_STRENGTH = -7;
 const PIPE_WIDTH = 60;
-const PIPE_GAP = 200; // Увеличенное расстояние между трубами
+const PIPE_GAP = 200;
 const BIRD_SIZE = 30;
-const PIPE_SPEED = 2; // Уменьшенная скорость игры
+const PIPE_SPEED = 2;
 const MAX_RECORDS = 5;
 
 // Переменные игры
@@ -36,7 +36,7 @@ topPipeImage.src = 'images/pipeUp.png';
 const bottomPipeImage = new Image();
 bottomPipeImage.src = 'images/pipeBottom.png';
 const backgroundImage = new Image();
-backgroundImage.src = 'images/bg.png'; // Единое изображение фона
+backgroundImage.src = 'images/bg.png';
 
 // Класс птицы
 function Bird() {
@@ -142,6 +142,7 @@ function restartGame() {
     bird.y = birdY;
     birdVelocity = 0;
     gamePaused = false;
+    document.getElementById("scoreText").innerText = 'Счет: ' + score;
     gameLoop();
 }
 
@@ -152,19 +153,15 @@ function updateHighScores() {
     highScores = highScores.slice(0, MAX_RECORDS);
     localStorage.setItem("highScores", JSON.stringify(highScores));
 
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
-    ctx.fillText('Топ 5 рекордов:', canvas.width - 160, 20);
-    highScores.forEach((record, index) => {
-        ctx.fillText(`${index + 1}. ${record}`, canvas.width - 160, 40 + index * 20);
-    });
+    let recordText = highScores.map((record, index) => `${index + 1}. ${record}`).join('\n');
+    document.getElementById("recordText").innerText = recordText;
 }
 
 // Главный игровой цикл
 function gameLoop() {
     if (gamePaused) return;
 
-    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); // Единый фон
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
 
     if (!birdAlive) {
         ctx.fillStyle = 'black';
@@ -176,7 +173,7 @@ function gameLoop() {
     }
 
     bird.update();
-    if (frame % 90 === 0) { // Увеличенный интервал появления труб
+    if (frame % 90 === 0) {
         pipes.push(new Pipe(canvas.width));
     }
     pipes.forEach(function(pipe) {
@@ -184,6 +181,7 @@ function gameLoop() {
         if (!pipe.passed && pipe.x + PIPE_WIDTH < bird.x) {
             score++;
             pipe.passed = true;
+            document.getElementById("scoreText").innerText = 'Счет: ' + score;
         }
         if (pipe.isOffScreen()) {
             pipes.shift();
@@ -192,11 +190,6 @@ function gameLoop() {
             birdAlive = false;
         }
     });
-
-    ctx.fillStyle = 'black';
-    ctx.font = '20px Arial';
-    ctx.fillText('Счет: ' + score, 20, 30);
-    
     frame++;
     requestAnimationFrame(gameLoop);
 }
