@@ -4,36 +4,55 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     background-color: #70c5ce;
     overflow: hidden;
 }
+
+#scoreText {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+#pauseText {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: none;
+}
+
 #gameContainer {
     display: flex;
-    position: relative;
+    align-items: center;
+    gap: 20px;
 }
+
+#gameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 canvas {
     background-color: #70c5ce;
     border: 1px solid black;
 }
-#scoreText {
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    color: black;
-    font-size: 20px;
-}
-#pauseText {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    color: black;
-    font-size: 20px;
-    display: none;
-}
+
 #recordPanel {
     width: 200px;
-    height: 600px;
+    height: 400px;
     background-color: rgba(255, 255, 255, 0.7);
     border-left: 2px solid black;
     padding: 20px;
@@ -41,16 +60,20 @@ canvas {
     color: black;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
 }
+
 #recordPanel h2 {
     margin: 0;
     padding-bottom: 10px;
     text-align: center;
 }
+
 #recordText {
     white-space: pre-line;
     overflow-y: auto;
-    max-height: 400px;
-    padding-bottom: 10px;
+    max-height: 300px;
+    width: 100%;
+    text-align: center;
 }
