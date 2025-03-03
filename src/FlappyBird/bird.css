@@ -4,7 +4,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     height: 100vh;
     background-color: #70c5ce;
     overflow: hidden;
@@ -49,6 +48,7 @@ body.dark-theme {
     transition: transform 0.3s ease;
 }
 
+
 .menu {
     position: fixed;
     top: 0;
@@ -75,6 +75,81 @@ body.dark-theme {
 .menu.show {
     left: 0; 
 }
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 80px; 
+    gap: 30px; 
+    padding: 0 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 20px;
+    margin-top: 6%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.column-title{
+    color: white;
+    font-size: 40px;
+    text-shadow: 
+      2px 2px 0px black,  
+      -2px -2px 0px black, 
+      2px -2px 0px black, 
+      -2px 2px 0px black;
+}
+
+.column-btn {
+    background-color: #E5C185;
+    color: #C7522A;
+    padding: 10px;
+    border: 0;
+    border-radius: 20px;
+}
+
+.note-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.note-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.note {
+    color: white;
+    font-size: 20px;
+    text-shadow: 
+          1px 1px 0px black,  
+          -1px -1px 0px black, 
+          1px -1px 0px black,  
+          -1px 1px 0px black;
+    margin: 10px 0;
+}
+
+.toggle-theme {
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
 
 #game-section{
     flex-direction: row;
