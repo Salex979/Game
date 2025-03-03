@@ -4,8 +4,8 @@ document.getElementById("startSnake").addEventListener("click", function () {
 document.getElementById("startTetris").addEventListener("click", function () {
         window.open("Tetris/tetris.html", "_blank");
 });
-document.getElementById("startTanks").addEventListener("click", function () {
-        window.open("tanks.html", "_blank");
+document.getElementById("startBox").addEventListener("click", function () {
+        window.open("FlappyBird/FlappyBird.html", "_blank");
 });
 document.getElementById("startTTT").addEventListener("click", function () {
         window.open("TTT/ttt.html", "_blank");
