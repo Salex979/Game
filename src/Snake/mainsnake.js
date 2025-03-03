@@ -29,8 +29,8 @@ function draw() {
         for (let y = 0; y < canvas.height; y += gridSize) {
             // Чередование цветов
             let color = ((x / gridSize) % 2 === 0 ^ (y / gridSize) % 2 === 0)
-                ? "#58508d" // Цвет первой клетки
-                : "#504981"; // Цвет второй клетки
+                ? "#fbf2c4" // Цвет первой клетки
+                : "#e5c185"; // Цвет второй клетки
 
             // Заполняем прямоугольник цветом
             ctx.fillStyle = color;
@@ -39,12 +39,12 @@ function draw() {
     }
 
     // Рисуем еду
-    ctx.fillStyle = "red";
+    ctx.fillStyle = "#c7522a";
     ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
 
     // Рисуем змейку
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = i === 0 ? "#ffa600" : "#ff6361"; // Голова жёлтая, тело зелёное
+        ctx.fillStyle = i === 0 ? "#008585" : "#74a892"; // Голова жёлтая, тело зелёное
         ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize, gridSize);
 
         // Глазки змейки
@@ -210,20 +210,43 @@ function clearLeaderboard() {
 
 // Управление змейкой
 document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowUp" && dy === 0) { nextDirection = { dx: 0, dy: -1 }; } // Стрелка вверх
-    if (event.key === "ArrowDown" && dy === 0) { nextDirection = { dx: 0, dy: 1 }; } // Стрелка вниз
-    if (event.key === "ArrowLeft" && dx === 0) { nextDirection = { dx: -1, dy: 0 }; } // Стрелка влево
-    if (event.key === "ArrowRight" && dx === 0) { nextDirection = { dx: 1, dy: 0 }; } // Стрелка вправо
-    if (event.key === "Escape") {
-      // Проверяем текущее состояние паузы
-      if (isPaused) {
-          // Если игра была на паузе, возобновляем её
-          resumeGame();
-      } else {
-          // Если игра не была на паузе, ставим её на паузу
-          pauseGame();
-      }
-  }
+    switch (event.key) {
+        case "ArrowUp":
+        case "w":   
+        case "W":
+        case "ц":
+        case "Ц":
+            if (dy === 0) { nextDirection = { dx: 0, dy: -1 }; }
+            break;
+        case "ArrowDown":
+        case "s":   
+        case "S":
+        case "ы":
+        case "Ы":   
+            if (dy === 0) { nextDirection = { dx: 0, dy: 1 }; }
+            break;
+        case "ArrowLeft":
+        case "a":   
+        case "A":
+        case "ф":
+        case "Ф":   
+            if (dx === 0) { nextDirection = { dx: -1, dy: 0 }; }
+            break;
+        case "ArrowRight":
+        case "d":   
+        case "D":
+        case "в":
+        case "В": 
+            if (dx === 0) { nextDirection = { dx: 1, dy: 0 }; }
+            break;
+        case "Escape":
+            if (isPaused) {
+                resumeGame();
+            } else {
+                pauseGame();
+            }
+            break;
+    }
 });
 
 // Загрузка рейтинга при старте

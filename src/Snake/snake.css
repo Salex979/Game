@@ -5,9 +5,9 @@
 
 body {
       font-family: Arial, sans-serif;
-      background-color: #003f5c;
+      background-color: #025c5c;
       color: #F2F2F2;
-      margin: 0;
+      margin-left: 200px;
       padding: 0;
       display: flex;
       justify-content: center;
@@ -37,11 +37,11 @@ body {
 
 #gameCanvas {
       background-color: #58508d;
-      border: 5px solid #bc5090;
+      border: 5px solid #008585;
 }
 
 #scoreBoard {
-      color: #D7F205;
+      color: #ffd380;
       font-weight: bold;
       font-size: 24px;
 }
@@ -52,41 +52,29 @@ body {
 }
 
 #leaderboard {
-      text-align: left;
+      border: 5px solid #008585;
       padding: 10px;
-      border: 5px solid #bc5090;
-      border-radius: 10;
-      background-color: #58508d;
-      width: 300px;
-      max-height: 70vh;
+      width: 150px;
       overflow-y: auto;
+      max-height: 50vh;
+      margin-top: 77px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
 }
 
 .leaderboard-title {
-      color: #D7F205;
+      color: #ffd380;
 }
 
 #scoreList {
       list-style: none;
 }
 
-#pauseIcon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 50px;
-      color: rgba(255, 255, 255, 0.7);
-      z-index: 10;
-      display: none;
-}
-
 #clearButton {
-      background-color: #D7F205;
+      position: fixed;
+      background-color: #ffd380;
       padding: 5px;
+      margin-top: 350px;
       border: 0;
 }
