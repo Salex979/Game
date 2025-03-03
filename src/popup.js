@@ -8,7 +8,7 @@ document.getElementById("startTanks").addEventListener("click", function () {
         window.open("tanks.html", "_blank");
 });
 document.getElementById("startTTT").addEventListener("click", function () {
-        window.open("ttt.html", "_blank");
+        window.open("TTT/ttt.html", "_blank");
 }); 
 document.getElementById("start2048").addEventListener("click", function () {
         window.open("2048/2048.html", "_blank");
