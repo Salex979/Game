@@ -6,7 +6,19 @@
     <title>Flappy Bird</title>
     <link rel="stylesheet" href="bird.css">
 </head>
-<body>
+<body class="light-theme">
+    <!-- Бургер-меню -->
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+    </div>
+
+    <!-- Меню -->
+    <div class="menu" id="menu">
+        <a href="#" onclick="toggleTheme()">Mode</a>
+        <a href="#">Main</a>
+    </div>
     <div id="gameContainer">
         <div id="game-section">
             <div id="scoreText">Счет: 0</div>
@@ -20,5 +32,6 @@
     <div id="pauseText">Чтобы поставить на паузу нажмите Esc!</div>
 
     <script src="Bird.js"></script>
+    <script src="snake.js"></script>
 </body>
 </html>
