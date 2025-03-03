@@ -158,7 +158,7 @@ function endGame() {
 // Добавление счёта в рейтинг
 function addScoreToLeaderboard(score) {
     const listItem = document.createElement("li"); // Создаём новый элемент списка
-    listItem.textContent = `Игрок: ${score} очков`; // Выводим строку с результатом
+    listItem.textContent = `Player: ${score} points`; // Выводим строку с результатом
     scoreList.appendChild(listItem); // Добавляем результат в список лидеров
 }
 
