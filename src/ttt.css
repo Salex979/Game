@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: black;
+}
+
+table {
+    margin: auto;
+    border-collapse: collapse;
+}
+
+td {
+    width: 100px;
+    height: 100px;
+    border: 2px solid white;
+    cursor: pointer;
+    font-size: 60px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.player-o {
+    color: rgb(151, 42, 151);
+}
+
+#restartButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
