@@ -2,6 +2,7 @@
 
 *{
       margin: 0;
+      padding: 0;
 }
 
 ul {
@@ -15,7 +16,7 @@ body {
       font-style: normal;
       margin: 0;
       padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.light-theme {
@@ -53,12 +54,20 @@ body.dark-theme {
     border-radius: 50px;
 }
 
+body.dark-theme .burger-menu {
+    background-color: #74A892;
+}
+
 .burger-bar {
     width: 17px;
     height: 4px;
     border-radius: 6px;
     background-color: #C7522A;
     transition: transform 0.3s ease;
+}
+
+body.dark-theme .burger-bar {
+    background-color: #004343;
 }
 
 
@@ -78,11 +87,20 @@ body.dark-theme {
     z-index: 1000;
 }
 
+body.dark-theme .menu {
+    background-color: #74A892;
+}
+
 .menu a {
     color: white;
     text-decoration: none;
     margin: 15px 0;
-    font-size: 18px;
+    font-size: 20px;
+    text-shadow:
+          1px 1px 0px black,
+          -1px -1px 0px black,
+          1px -1px 0px black,
+          -1px 1px 0px black;
 }
 
 .menu.show {
@@ -110,10 +128,6 @@ body.dark-theme {
     gap: 20px;
 }
 
-.note-column{
-    max-width: 450px;
-}
-
 .column-title{
     color: white;
     font-size: 40px;
@@ -126,20 +140,27 @@ body.dark-theme {
 
 .column-btn {
     font-family: "Jersey 10", sans-serif;
-    font-size: 1    6px;
+    font-size: 16px;
     background-color: white;
     color: #C7522A;
     padding: 10px 20px;
     border: #C7522A 3px solid;
+}
 
+body.dark-theme .column-btn {
+    color: #74A892;
+    border: #74A892 3px solid;
 }
 
 .note-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 3px solid #F0DAA5;
+}
+
+body.dark-theme .note-input {
+    border: 3px solid #74A892;
 }
 
 .note-list {
@@ -186,6 +207,14 @@ body.dark-theme {
       -2px 2px 0px #C7522A;
 }
 
+body.dark-theme .game-section-title {
+    text-shadow: 
+      2px 2px 0px #74A892,  
+      -2px -2px 0px #74A892, 
+      2px -2px 0px #74A892, 
+      -2px 2px 0px #74A892;
+}
+
 #scoreText {
     color: white;
     font-size: 20px;
@@ -223,9 +252,13 @@ body.dark-theme {
 }
 
 canvas {
-    background-color: #70c5ce;
-    border: 1px solid black;
-    
+    border: 8px solid #F0DAA5;
+    display: block;
+    margin: 0 auto;
+}
+
+body.dark-theme canvas {
+    border: 8px solid #008585;
 }
 
 #recordPanel {

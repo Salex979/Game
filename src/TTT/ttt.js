@@ -62,7 +62,7 @@ const cells = document.querySelectorAll('#gameBoard td');
         // Ход игрока
         function playerMove(event) {
             if (currentPlayer === 'X') {
-                event.target.style.color = 'orange'; // Цвет для крестика
+                event.target.style.color = '#C7522A'; // Цвет для крестика
             }
             if (!event.target.textContent && !gameOver) {
                 event.target.textContent = currentPlayer;

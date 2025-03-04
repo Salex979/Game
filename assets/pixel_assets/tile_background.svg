@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100" height="100" fill="#7b6152" />
+  <rect x="0" y="0" width="10" height="10" fill="#6b5142" />
+  <rect x="20" y="0" width="10" height="10" fill="#6b5142" />
+  <rect x="40" y="0" width="10" height="10" fill="#6b5142" />
+  <rect x="60" y="0" width="10" height="10" fill="#6b5142" />
+  <rect x="80" y="0" width="10" height="10" fill="#6b5142" />
+  <rect x="10" y="10" width="10" height="10" fill="#6b5142" />
+  <rect x="30" y="10" width="10" height="10" fill="#6b5142" />
+  <rect x="50" y="10" width="10" height="10" fill="#6b5142" />
+  <rect x="70" y="10" width="10" height="10" fill="#6b5142" />
+  <rect x="90" y="10" width="10" height="10" fill="#6b5142" />
+  <rect x="0" y="20" width="10" height="10" fill="#6b5142" />
+  <rect x="20" y="20" width="10" height="10" fill="#6b5142" />
+  <rect x="40" y="20" width="10" height="10" fill="#6b5142" />
+  <rect x="60" y="20" width="10" height="10" fill="#6b5142" />
+  <rect x="80" y="20" width="10" height="10" fill="#6b5142" />
+</svg>

@@ -1,8 +1,9 @@
-const canvas = document.getElementById('tetris');
+const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const nextCanvas = document.getElementById('next-piece-canvas');
 const nextCtx = nextCanvas.getContext('2d');
-const scoreDisplay = document.getElementById('score');
+const scoreDisplay = document.getElementById('scoreBoard');
+const scoreList = document.getElementById("scoreList");
 const pauseButton = document.getElementById('pause-button');
 
 let isPaused = false;
@@ -102,7 +103,7 @@ function clearLines() {
 }
 
 function updateScore() {
-    scoreDisplay.textContent = `Счет: ${score}`;
+    scoreDisplay.textContent = `Score: ${score}`;
 }
 
 function draw() {
@@ -118,13 +119,20 @@ function drawNextPiece() {
         if (cell) drawCell(nextCtx, x, y, nextPiece.color);
     }));
 }
-
 function togglePause() {
     isPaused = !isPaused;
     pauseButton.textContent = isPaused ? 'Продолжить' : 'Пауза';
 }
 
+// Обработчик нажатия клавиши Escape
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+        togglePause();
+    }
+});
+
 pauseButton.addEventListener('click', togglePause);
+
 
 function initGame() {
     createBoard();
@@ -139,6 +147,40 @@ function initGame() {
     updateScore();
     draw();
     drawNextPiece();
+}
+
+function endGame() {
+    gameRunning = false; // Ставим игру на стоп
+    alert(`Игра окончена! Ваш итоговый рейтинг: ${score}`); // Сообщение о конце игры
+    addScoreToLeaderboard(score); // Добавляем результат в рейтинг
+    saveLeaderboard(); // Сохраняем рейтинг в localStorage
+    location.reload(); // Перезагружаем страницу для нового раунда
+}
+// Добавление счёта в рейтинг
+function addScoreToLeaderboard(score) {
+    const listItem = document.createElement("li"); // Создаём новый элемент списка
+    listItem.textContent = `Player: ${score} points`; // Выводим строку с результатом
+    scoreList.appendChild(listItem); // Добавляем результат в список лидеров
+}
+// Сохранение рейтинга в localStorage
+function saveLeaderboard() {
+    const leaderboard = []; // Создаем массив для хранения результатов
+    const items = scoreList.getElementsByTagName("li"); // Получаем все элементы списка
+    for (let item of items) {
+        leaderboard.push(item.textContent); // Заполняем массив результатами
+    }
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard)); // Сохраняем рейтинг в localStorage
+}
+// Загрузка рейтинга из localStorage
+function loadLeaderboard() {
+    const leaderboard = JSON.parse(localStorage.getItem("leaderboard")); // Получаем данные из localStorage
+    if (leaderboard) { // Если есть сохранённые результаты
+        leaderboard.forEach(score => {
+            const listItem = document.createElement("li"); // Создаём новый элемент списка
+            listItem.textContent = score; // Вставляем результат
+            scoreList.appendChild(listItem); // Добавляем в список лидеров
+        });
+    }
 }
 
 function handleKeyPress(event) {

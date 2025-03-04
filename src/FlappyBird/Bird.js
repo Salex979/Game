@@ -1,8 +1,8 @@
 // Настройки канваса
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = 400;
-canvas.height = 600;
+canvas.width = 300;
+canvas.height = 500;
 
 // Константы игры
 const GRAVITY = 0.5;
@@ -180,8 +180,8 @@ function gameLoop() {
 
     if (!birdAlive) {
         ctx.fillStyle = 'black';
-        ctx.font = '45px Arial';
-        ctx.fillText('You LOOSE))))))', canvas.width / 2 - 100, canvas.height / 2);
+        ctx.font = '40px Arial';
+        ctx.fillText('YOU LOOSE', canvas.width / 2 - 100, canvas.height / 2);
         ctx.fillText('Score: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
         updateHighScores();
         return;
