@@ -1,0 +1,24 @@
+{
+  "name": "game-collection",
+  "version": "1.0.0",
+  "description": "Collection of browser games including 2048",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleFileExtensions": ["js", "json"],
+    "transform": {},
+    "testMatch": ["**/test/**/*.test.js"],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "<rootDir>/test/__mocks__/styleMock.js",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/test/__mocks__/fileMock.js"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}

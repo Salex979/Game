@@ -344,3 +344,8 @@ class Game2048 {
 window.addEventListener('load', () => {
     new Game2048();
 });
+
+// Export the Game2048 class for testing
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Game2048;
+}
