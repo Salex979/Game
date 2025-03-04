@@ -1,4 +1,4 @@
-import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 
 *{
       margin: 0;
@@ -87,11 +87,11 @@ body.dark-theme {
 
 #main-container {
     display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      margin-top: 80px; 
-      gap: 30px; 
-      padding: 0 20px;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 80px;  */
+    gap: 30px; 
+    padding: 0 20px;
 }
 
 .column {
@@ -106,6 +106,10 @@ body.dark-theme {
     gap: 20px;
 }
 
+.note-column{
+    max-width: 450px;
+}
+
 .column-title{
     color: white;
     font-size: 40px;
@@ -117,11 +121,13 @@ body.dark-theme {
 }
 
 .column-btn {
-    background-color: #E5C185;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 16px;
+    background-color: white;
     color: #C7522A;
-    padding: 10px;
-    border: 0;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border: #C7522A 3px solid;
+
 }
 
 .note-input {
@@ -133,7 +139,7 @@ body.dark-theme {
 }
 
 .note-list {
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -160,13 +166,15 @@ body.dark-theme {
 
 
 #game-section{
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .game-section-title{
     color: white;
-    font-size: 100px;
+    font-size: 85px;
     text-shadow: 
       2px 2px 0px #C7522A,  
       -2px -2px 0px #C7522A, 
@@ -174,7 +182,7 @@ body.dark-theme {
       -2px 2px 0px #C7522A;
 }
 
-.game-section-text {
+#scoreText {
     color: white;
     font-size: 20px;
     text-shadow: 
@@ -183,14 +191,6 @@ body.dark-theme {
       1px -1px 0px black, 
       -1px 1px 0px black;
     margin-bottom: 10px;
-}
-
-#scoreText {
-    font-size: 28px;
-    font-weight: bold;
-    color: black;
-    text-align: center;
-    margin-bottom: 15px;
 }
 
 #pauseText {
