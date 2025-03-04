@@ -344,6 +344,25 @@ describe('Game2048', () => {
             const result = game.rotateGrid(grid);
             expect(result).toEqual(expected);
         });
+
+        test('rotateGrid should rotate the grid 90 degrees clockwise', () => {
+            const grid = [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 1]
+            ];
+            
+            const expected = [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 0, 0, 0]
+            ];
+            
+            const result = game.rotateGrid(grid);
+            expect(result).toEqual(expected);
+        });
     });
     
     describe('Move Operations', () => {
@@ -440,6 +459,24 @@ describe('Game2048', () => {
                 [0, 0, 0, 0]
             ]);
         });
+
+        test('moveUp should compress and merge tiles upward', () => {
+            game.grid = [
+                [0, 0, 0, 2],
+                [16, 0, 0, 0],
+                [16, 0, 4, 2],
+                [0, 0, 0, 0]
+            ];
+            
+            const result = game.moveUp();
+            expect(result).toBe(true);
+            expect(game.grid).toEqual([
+                [32, 0, 4, 4],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
+            ]);
+        });
         
         test('moveDown should compress and merge tiles downward', () => {
             game.grid = [
@@ -459,6 +496,25 @@ describe('Game2048', () => {
                 [0, 0, 4, 0]
             ]);
         });
+
+        test('moveDown should compress and merge tiles downward', () => {
+            game.grid = [
+                [0, 8, 0, 32],
+                [16, 0, 4, 0],
+                [16, 8, 0, 32],
+                [0, 0, 4, 0]
+            ];
+            
+            const result = game.moveDown();
+            
+            expect(result).toBe(true);
+            expect(game.grid).toEqual([
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [32, 16, 8, 64]
+            ]);
+        });
     });
     
     describe('Game State', () => {
@@ -473,12 +529,34 @@ describe('Game2048', () => {
             expect(game.isGameOver()).toBe(true);
         });
         
+        test('isGameOver should return true when no moves are possible', () => {
+            game.grid = [
+                [8, 32, 8, 32],
+                [4, 2, 4, 2],
+                [2, 4, 16, 4],
+                [4, 128, 4, 2]
+            ];
+            
+            expect(game.isGameOver()).toBe(true);
+        });
+
         test('isGameOver should return false when empty cells exist', () => {
             game.grid = [
                 [2, 4, 2, 4],
                 [4, 2, 4, 2],
                 [2, 4, 0, 4],
                 [4, 2, 4, 2]
+            ];
+            
+            expect(game.isGameOver()).toBe(false);
+        });
+
+        test('isGameOver should return false when empty cells exist', () => {
+            game.grid = [
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0],
+                [0, 0, 0, 0]
             ];
             
             expect(game.isGameOver()).toBe(false);
@@ -490,6 +568,17 @@ describe('Game2048', () => {
                 [4, 2, 4, 2],
                 [2, 4, 4, 4],
                 [4, 2, 4, 2]
+            ];
+            
+            expect(game.isGameOver()).toBe(false);
+        });
+
+        test('isGameOver should return false when adjacent cells have the same value', () => {
+            game.grid = [
+                [2, 2, 2, 2],
+                [2, 2, 2, 2],
+                [2, 2, 2, 2],
+                [2, 2, 2, 2]
             ];
             
             expect(game.isGameOver()).toBe(false);
