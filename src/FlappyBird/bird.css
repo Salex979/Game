@@ -29,6 +29,10 @@ body.light-theme {
 
 body.dark-theme {
     background-image: url('images/background-dark.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: #fff;
 }
 
@@ -122,7 +126,7 @@ body.dark-theme {
 
 .column-btn {
     font-family: "Jersey 10", sans-serif;
-    font-size: 16px;
+    font-size: 1    6px;
     background-color: white;
     color: #C7522A;
     padding: 10px 20px;
@@ -209,6 +213,7 @@ body.dark-theme {
     display: flex;
     align-items: center;
     gap: 20px;
+    
 }
 
 #gameWrapper {
@@ -220,6 +225,7 @@ body.dark-theme {
 canvas {
     background-color: #70c5ce;
     border: 1px solid black;
+    
 }
 
 #recordPanel {
