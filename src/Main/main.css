@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+    background-image: url('/src/background/background-light.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+body.dark-mode {
+    background-image: url('/src/background/background-dark.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+.container-title {
+    font-size: 120px;
+    color: white;
+    text-shadow:
+        4px 4px 0px #C7522A,
+        -4px -4px 0px #C7522A,
+        4px -4px 0px #C7522A,
+        -4px 4px 0px #C7522A;
+}
+
+body.dark-mode .container-title {
+    text-shadow: 
+      4px 4px 0px #74A892,  
+      -4px -4px 0px #74A892, 
+      4px -4px 0px #74A892, 
+      -4px 4px 0px #74A892;
+}
+
+.game-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+.game-list li {
+    margin: 10px 0;
+}
+.game-list a {
+    text-decoration: none;
+    color: white;
+    font-size: 28px;
+    text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
+}
+
+.timer-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.timer-text {
+    font-size: 20px;
+    color: white;
+    text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
+}
+
+#timer {
+    font-size: 16px;
+    background-color: white;
+    color: #C7522A;
+    padding: 3px;
+    border: #F0DAA5 3px solid;
+    width: 40%;
+}
+
+body.dark-mode #timer {
+    color: #74A892;
+    border: #74A892 3px solid;
+}
+
+.timer-btns {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+button {
+    margin-top: 5px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 16px;
+    background-color: white;
+    color: #C7522A;
+    padding: 5px 10px;
+    border: #C7522A 3px solid;
+}
+
+body.dark-mode button {
+    color: #74A892;
+    border: #74A892 3px solid;
+}
+
+#time-left {
+    font-size: 32px;
+    color: white;
+    text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
+}
+
+.theme-switch {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+    text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
+}

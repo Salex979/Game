@@ -21,7 +21,7 @@ body {
 }
 
 body.light-theme {
-      background-image: url('images/background-lightc.png');
+      background-image: url('/src/background/background-light.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -30,7 +30,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-      background-image: url('images/background-dark.png');
+      background-image: url('/src/background/background-dark.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -114,7 +114,7 @@ body.dark-theme .menu {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 80px;
+      margin-top: 30px;
       gap: 30px;
       padding: 0 20px;
 }
@@ -124,7 +124,6 @@ body.dark-theme .menu {
       flex: 1;
       padding: 20px;
       margin-top: 12%;
-      border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
@@ -163,8 +162,7 @@ body.dark-theme .column-btn {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      border: 3px solid #F0DAA5;
 }
 
 .note-list {
