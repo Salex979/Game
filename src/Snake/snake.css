@@ -10,6 +10,7 @@ ul {
       padding: 0;
 }
 
+/* Общие стили */
 body {
       font-family: "Jersey 10", sans-serif;
       font-weight: 400;
@@ -20,7 +21,7 @@ body {
 }
 
 body.light-theme {
-      background-image: url('images/background-lightc.png');
+      background-image: url('/src/background/background-light.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -29,7 +30,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-      background-image: url('images/background-dark.png');
+      background-image: url('/src/background/background-dark.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -37,6 +38,7 @@ body.dark-theme {
       color: #fff;
 }
 
+/* Бургер-меню */
 .burger-menu {
       position: absolute;
       top: 20px;
@@ -107,27 +109,28 @@ body.dark-theme .menu {
       left: 0;
 }
 
+/* Главная часть */
 #main-container {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 80px;
+      margin-top: 30px;
       gap: 30px;
       padding: 0 20px;
 }
 
+/* Колонки */
 .column {
       flex: 1;
       padding: 20px;
       margin-top: 12%;
-      border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 20px;
 }
-
+/* Название колонок */
 .column-title {
       color: white;
       font-size: 40px;
@@ -138,6 +141,7 @@ body.dark-theme .menu {
             -2px 2px 0px black;
 }
 
+/* Кнопки заметок и рейтинга */
 .column-btn {
       font-family: "Jersey 10", sans-serif;
       font-size: 16px;
@@ -153,12 +157,12 @@ body.dark-theme .column-btn {
       border: #74A892 3px solid;
 }
 
+/* Все для заметок */
 .note-input {
       width: 100%;
       padding: 10px;
       margin-bottom: 10px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
+      border: 3px solid #F0DAA5;
 }
 
 .note-list {
@@ -187,6 +191,7 @@ body.dark-theme .column-btn {
       margin-top: 20px;
 }
 
+/* Отдел с игрой */
 .game-section {
       display: flex;
       flex-direction: column;
@@ -222,16 +227,6 @@ body.dark-theme .game-section-title {
       margin-bottom: 10px;
 }
 
-#scoreList {
-      color: white;
-      font-size: 20px;
-      text-shadow:
-            1px 1px 0px black,
-            -1px -1px 0px black,
-            1px -1px 0px black,
-            -1px 1px 0px black;
-}
-
 canvas {
       border: 8px solid #F0DAA5;
       display: block;
@@ -240,4 +235,15 @@ canvas {
 
 body.dark-theme canvas {
       border: 8px solid #008585;
+}
+
+/* Все о рейтинге */
+#scoreList {
+      color: white;
+      font-size: 20px;
+      text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
 }

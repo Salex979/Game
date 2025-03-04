@@ -7,30 +7,26 @@
     <link rel="stylesheet" href="snake.css">
 </head>
 <body class="light-theme">
-    <!-- Бургер-меню -->
-    <div class="burger-menu" onclick="toggleMenu()">
+
+    <div class="burger-menu">
         <div class="burger-bar"></div>
         <div class="burger-bar"></div>
         <div class="burger-bar"></div>
     </div>
 
-    <!-- Меню -->
     <div class="menu" id="menu">
-        <a href="#" onclick="toggleTheme()">Change mode</a>
-        <a href="#">Main</a>
+        <a href="#" id="theme-toggle">Change mode</a>
+        <a href="/src/Main/main.html">Main</a>
     </div>
 
-    <!-- Основной контейнер -->
     <div id="main-container">
-        <!-- Левая колонка: заметки -->
         <div class="column note-column">
             <h3 class="column-title">Notes</h3>
             <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
-            <button class="column-btn" onclick="addNote()">Add note</button>
+            <button class="column-btn" id="add-note-btn">Add note</button>
             <div class="note-list" id="note-list"></div>
         </div>
 
-        <!-- Средняя колонка: игра -->
         <div class="game-section">
             <h1 class="game-section-title">Zmeika</h1>
             <div class="game-section-text">
@@ -41,7 +37,6 @@
             <div id="recordMessage" style="display: none;"></div>
         </div>
 
-        <!-- Правая колонка: рейтинг -->
         <div class="column score-column">
             <h3 class="column-title">Rating</h3>
             <ul id="scoreList"></ul>
@@ -51,5 +46,6 @@
 
     <script src="mainsnake.js"></script>
     <script src="script.js"></script>
+    <script src="/src/Main/timer.js"></script>
 </body>
 </html>

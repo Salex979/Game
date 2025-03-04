@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 
 * {
-      margin: 0;
-      padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
 }
 
 body {
@@ -15,7 +19,7 @@ body {
 }
 
 body.light-theme {
-    background-image: url('/src/background/background-light.png');
+    background-image: url('images/background-light.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -24,11 +28,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-    background-image: url('/src/background/background-dark.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background-image: url('images/background-dark.png');
     color: #fff;
 }
 
@@ -49,10 +49,6 @@ body.dark-theme {
     border-radius: 50px;
 }
 
-body.dark-theme .burger-menu {
-    background-color: #74A892;
-}
-
 .burger-bar {
     width: 17px;
     height: 4px;
@@ -61,41 +57,28 @@ body.dark-theme .burger-menu {
     transition: transform 0.3s ease;
 }
 
-body.dark-theme .burger-bar {
-    background-color: #004343;
-}
 
 .menu {
     position: fixed;
     top: 0;
     left: -300px;
-    width: 150px;
+    width: 240px;
     height: 100%;
     background-color: #E5C185;
     color: white;
     display: flex;
     flex-direction: column;
     padding-top: 50px;
-    padding-left: 55px;
+    padding-left: 20px;
     transition: left 0.3s ease;
     z-index: 1000;
-    align-content: center;
-}
-
-body.dark-theme .menu {
-    background-color: #74A892;
 }
 
 .menu a {
     color: white;
     text-decoration: none;
     margin: 15px 0;
-    font-size: 20px;
-    text-shadow:
-          1px 1px 0px black,
-          -1px -1px 0px black,
-          1px -1px 0px black,
-          -1px 1px 0px black;
+    font-size: 18px;
 }
 
 .menu.show {
@@ -104,32 +87,37 @@ body.dark-theme .menu {
 
 #main-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-top: 30px;
-    gap: 30px;
-    padding: 0 20px;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 80px; 
+      gap: 30px; 
+      padding: 0 20px;
 }
 
 .column {
-    flex: 1;
     padding: 20px;
-    margin-top: 12%;
+    margin-top: 6%;
+    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
+}
+
+.note-column{
+    max-width: 450px;
 }
 
 .column-title {
     color: white;
     font-size: 40px;
     text-shadow:
-          2px 2px 0px black,
-          -2px -2px 0px black,
-          2px -2px 0px black,
-          -2px 2px 0px black;
+        2px 2px 0px black,
+        -2px -2px 0px black,
+        2px -2px 0px black,
+        -2px 2px 0px black;
 }
 
 .column-btn {
@@ -142,20 +130,16 @@ body.dark-theme .menu {
 
 }
 
-body.dark-theme .column-btn {
-    color: #74A892;
-    border: #74A892 3px solid;
-}
-
 .note-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 3px solid #F0DAA5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .note-list {
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
 }
 
@@ -163,10 +147,10 @@ body.dark-theme .column-btn {
     color: white;
     font-size: 20px;
     text-shadow:
-          1px 1px 0px black,
-          -1px -1px 0px black,
-          1px -1px 0px black,
-          -1px 1px 0px black;
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
     margin: 10px 0;
 }
 
@@ -180,54 +164,91 @@ body.dark-theme .column-btn {
     margin-top: 20px;
 }
 
-.game-section {
-    display: flex;
-    flex-direction: column;
+
+#game-section{
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
 }
 
 .game-section-title {
     color: white;
     font-size: 100px;
-    text-shadow:
-          2px 2px 0px #C7522A,
-          -2px -2px 0px #C7522A,
-          2px -2px 0px #C7522A,
-          -2px 2px 0px #C7522A;
-}
-
-body.dark-theme .game-section-title {
     text-shadow: 
-      2px 2px 0px #74A892,  
-      -2px -2px 0px #74A892, 
-      2px -2px 0px #74A892, 
-      -2px 2px 0px #74A892;
+      2px 2px 0px #C7522A,  
+      -2px -2px 0px #C7522A, 
+      2px -2px 0px #C7522A, 
+      -2px 2px 0px #C7522A;
 }
 
-table {
-    margin: auto;
-    border-collapse: collapse;
+#scoreText {
+    color: white;
+    font-size: 20px;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
+    margin-bottom: 10px;
 }
 
-td {
-    width: 100px;
-    height: 100px;
-    border: 2px solid white;
-    cursor: pointer;
-    font-size: 60px;
-    line-height: 100px;
+#scoreText {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#pauseText {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: none;
+}
+
+#gameContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#gameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+    background-color: #70c5ce;
+    border: 1px solid black;
+}
+
+#recordPanel {
+    color: white;
+    font-size: 20px;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
+}
+
+#recordPanel h2 {
+    margin: 0;
+    padding-bottom: 10px;
     text-align: center;
 }
 
-.player-o {
-    color: rgb(151, 42, 151);
-}
-
-#restartButton {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: lightgray;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
+#recordText {
+    white-space: pre-line;
+    overflow-y: auto;
+    max-height: 300px;
+    width: 100%;
+    text-align: center;
 }
