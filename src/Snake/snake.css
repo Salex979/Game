@@ -145,7 +145,7 @@ body.dark-theme .menu {
       color: #C7522A;
       padding: 10px 20px;
       border: #C7522A 3px solid;
-
+      cursor: pointer;
 }
 
 body.dark-theme .column-btn {
@@ -204,11 +204,11 @@ body.dark-theme .column-btn {
 }
 
 body.dark-theme .game-section-title {
-      text-shadow: 
-        2px 2px 0px #74A892,  
-        -2px -2px 0px #74A892, 
-        2px -2px 0px #74A892, 
-        -2px 2px 0px #74A892;
+      text-shadow:
+            2px 2px 0px #74A892,
+            -2px -2px 0px #74A892,
+            2px -2px 0px #74A892,
+            -2px 2px 0px #74A892;
 }
 
 .game-section-text {
