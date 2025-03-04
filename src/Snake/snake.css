@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
 
-*{
+* {
       margin: 0;
       padding: 0;
 }
@@ -20,7 +20,7 @@ body {
 }
 
 body.light-theme {
-      background-image: url('images/background-light.png');
+      background-image: url('images/background-lightc.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -30,6 +30,10 @@ body.light-theme {
 
 body.dark-theme {
       background-image: url('images/background-dark.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: #fff;
 }
 
@@ -45,7 +49,7 @@ body.dark-theme {
       width: 35px;
       height: 35px;
       cursor: pointer;
-      z-index: 1001; 
+      z-index: 1001;
       background-color: #E5C185;
       border-radius: 50px;
 }
@@ -69,8 +73,8 @@ body.dark-theme .burger-bar {
 .menu {
       position: fixed;
       top: 0;
-      left: -300px; 
-      width: 150px; 
+      left: -300px;
+      width: 150px;
       height: 100%;
       background-color: #E5C185;
       color: white;
@@ -80,6 +84,7 @@ body.dark-theme .burger-bar {
       padding-left: 55px;
       transition: left 0.3s ease;
       z-index: 1000;
+      align-content: center;
 }
 
 body.dark-theme .menu {
@@ -91,23 +96,23 @@ body.dark-theme .menu {
       text-decoration: none;
       margin: 15px 0;
       font-size: 20px;
-      text-shadow: 
-        1px 1px 0px black,  
-        -1px -1px 0px black, 
-        1px -1px 0px black, 
-        -1px 1px 0px black;
+      text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
 }
 
 .menu.show {
-      left: 0; 
+      left: 0;
 }
 
 #main-container {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 80px; 
-      gap: 30px; 
+      margin-top: 80px;
+      gap: 30px;
       padding: 0 20px;
 }
 
@@ -123,14 +128,14 @@ body.dark-theme .menu {
       gap: 20px;
 }
 
-.column-title{
+.column-title {
       color: white;
       font-size: 40px;
-      text-shadow: 
-        2px 2px 0px black,  
-        -2px -2px 0px black, 
-        2px -2px 0px black, 
-        -2px 2px 0px black;
+      text-shadow:
+            2px 2px 0px black,
+            -2px -2px 0px black,
+            2px -2px 0px black,
+            -2px 2px 0px black;
 }
 
 .column-btn {
@@ -164,10 +169,10 @@ body.dark-theme .column-btn {
 .note {
       color: white;
       font-size: 20px;
-      text-shadow: 
-            1px 1px 0px black,  
-            -1px -1px 0px black, 
-            1px -1px 0px black,  
+      text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
             -1px 1px 0px black;
       margin: 10px 0;
 }
@@ -188,14 +193,14 @@ body.dark-theme .column-btn {
       align-items: center;
 }
 
-.game-section-title{
+.game-section-title {
       color: white;
       font-size: 100px;
-      text-shadow: 
-        2px 2px 0px #C7522A,  
-        -2px -2px 0px #C7522A, 
-        2px -2px 0px #C7522A, 
-        -2px 2px 0px #C7522A;
+      text-shadow:
+            2px 2px 0px #C7522A,
+            -2px -2px 0px #C7522A,
+            2px -2px 0px #C7522A,
+            -2px 2px 0px #C7522A;
 }
 
 body.dark-theme .game-section-title {
@@ -209,22 +214,22 @@ body.dark-theme .game-section-title {
 .game-section-text {
       color: white;
       font-size: 20px;
-      text-shadow: 
-        1px 1px 0px black,  
-        -1px -1px 0px black, 
-        1px -1px 0px black, 
-        -1px 1px 0px black;
+      text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
       margin-bottom: 10px;
 }
 
 #scoreList {
       color: white;
       font-size: 20px;
-      text-shadow: 
-        1px 1px 0px black,  
-        -1px -1px 0px black, 
-        1px -1px 0px black, 
-        -1px 1px 0px black;
+      text-shadow:
+            1px 1px 0px black,
+            -1px -1px 0px black,
+            1px -1px 0px black,
+            -1px 1px 0px black;
 }
 
 canvas {

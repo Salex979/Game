@@ -20,22 +20,26 @@
         <a href="#">Main</a>
     </div>
 
-    <div class="column note-column">
-        <h3 class="column-title">Notes</h3>
-        <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
-        <button class="column-btn" onclick="addNote()">Add note</button>
-        <div class="note-list" id="note-list"></div>
-    </div>
-
+    
     <div id="main-container">
+        <div class="column note-column">
+            <h3 class="column-title">Notes</h3>
+            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
+            <button class="column-btn" onclick="addNote()">Add note</button>
+            <div class="note-list" id="note-list"></div>
+        </div>
 
         <div id="gameContainer">
             <div id="game-section">
-                <div id="scoreText">Счет: 0</div>
+                <h1 class="game-section-title">Flappy Bird</h1>
+                <div class="game-section-text">
+
+                    <div id="scoreText">Score: 0</div>
+                </div>
                 <canvas id="gameCanvas"></canvas>
             </div>
-            <div id="recordPanel">
-                <h2>Топ пять лучших залетов!</h2>
+            <div class="column" id="recordPanel">
+                <h2>Rating</h2>
                 <div id="recordText"></div>
             </div>
         </div>
@@ -44,6 +48,6 @@
 
 
     <script src="Bird.js"></script>
-    <script src="snake.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

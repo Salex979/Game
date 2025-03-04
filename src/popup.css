@@ -1,0 +1,26 @@
+body {
+      background-color: #004343;
+      color: #74A892;
+      text-align: center;
+}
+
+.start_button {
+      background-color: #008585;
+      border: 5px solid #003030;
+      border-radius: 20px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 1s;
+}
+
+.start_button:hover {
+      background-color: #30a291
+}
+
+.start_button img {
+      width: 64px;
+      height: 64px;
+}
