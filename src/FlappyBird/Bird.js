@@ -47,11 +47,17 @@ function Bird() {
 
     this.draw = function() {
         if (birdVelocity < 0) {
-            ctx.drawImage(birdUpImage, this.x, this.y, this.width, this.height);
+            if (ctx && birdUpImage.complete) {
+                ctx.drawImage(birdUpImage, this.x, this.y, this.width, this.height);
+            }
         } else if (birdVelocity > 0) {
-            ctx.drawImage(birdDownImage, this.x, this.y, this.width, this.height);
+            if (ctx && birdDownImage.complete) {
+                ctx.drawImage(birdDownImage, this.x, this.y, this.width, this.height);
+            }            
         } else {
-            ctx.drawImage(birdMidImage, this.x, this.y, this.width, this.height);
+            if (ctx && birdMidImage.complete) {
+                ctx.drawImage(birdMidImage, this.x, this.y, this.width, this.height);
+            }
         }
     };
 
@@ -85,8 +91,14 @@ function Pipe(x) {
     this.passed = false;
 
     this.draw = function() {
-        ctx.drawImage(topPipeImage, this.x, 0, PIPE_WIDTH, this.topHeight);
-        ctx.drawImage(bottomPipeImage, this.x, canvas.height - this.bottomHeight, PIPE_WIDTH, this.bottomHeight);
+        if (ctx && topPipeImage.complete) {
+            ctx.drawImage(topPipeImage, this.x, 0, PIPE_WIDTH, this.topHeight);
+        }
+        
+        if (ctx && bottomPipeImage.complete) {
+            ctx.drawImage(bottomPipeImage, this.x, canvas.height - this.bottomHeight, PIPE_WIDTH, this.bottomHeight);
+        }
+        
     };
 
     this.update = function() {
@@ -161,7 +173,10 @@ function updateHighScores() {
 function gameLoop() {
     if (gamePaused) return;
 
-    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    if (ctx && backgroundImage && backgroundImage.complete) {
+        ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+    }
+    
 
     if (!birdAlive) {
         ctx.fillStyle = 'black';
@@ -196,3 +211,16 @@ function gameLoop() {
 
 // Запуск игры
 gameLoop();
+
+function checkCollision(bird, pipe) {
+    return (
+        bird.x < pipe.x + PIPE_WIDTH &&
+        bird.x + bird.width > pipe.x &&
+        (bird.y < pipe.topHeight || bird.y + bird.height > canvas.height - pipe.bottomHeight)
+    );
+}
+
+
+module.exports = { Bird, Pipe, restartGame, checkCollision };
+
+

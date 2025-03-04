@@ -26,7 +26,7 @@ const shapes = [
     [[1, 1, 1], [0, 0, 1]], // J
     [[1, 1, 1], [1, 0, 0]] // L
 ];
-const colors = ['cyan', 'yellow', 'purple', 'red', 'green', 'blue', 'orange'];
+const colors = ['#74A892', '#F0DAA5', '#004343', '#C7522A', '#E5C185', '#008585'];
 
 function createBoard() {
     board = Array.from({ length: rows }, () => Array(cols).fill(0));
