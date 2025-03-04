@@ -1,0 +1,15 @@
+{
+  "name": "flappy-bird",
+  "version": "1.0.0",
+  "description": "Flappy Bird Game",
+  "main": "Bird.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.6.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
