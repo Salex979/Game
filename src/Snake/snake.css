@@ -165,6 +165,10 @@ body.dark-theme .column-btn {
       border: 3px solid #F0DAA5;
 }
 
+body.dark-theme .note-input {
+      border: 3px solid #74A892;
+}
+
 .note-list {
       max-height: 400px;
       overflow-y: auto;
