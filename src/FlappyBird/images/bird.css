@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+
+* {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+body {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light-theme {
+    background-image: url('images/background-light.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #000;
+}
+
+body.dark-theme {
+    background-image: url('images/background-dark.png');
+    color: #fff;
+}
+
+.burger-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    z-index: 1001;
+    background-color: #E5C185;
+    border-radius: 50px;
+}
+
+.burger-bar {
+    width: 17px;
+    height: 4px;
+    border-radius: 6px;
+    background-color: #C7522A;
+    transition: transform 0.3s ease;
+}
+
+
+.menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 240px;
+    height: 100%;
+    background-color: #E5C185;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 20px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+    font-size: 18px;
+}
+
+.menu.show {
+    left: 0;
+}
+
+#main-container {
+    display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 80px; 
+      gap: 30px; 
+      padding: 0 20px;
+}
+
+.column {
+    padding: 20px;
+    margin-top: 6%;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.note-column{
+    max-width: 450px;
+}
+
+.column-title {
+    color: white;
+    font-size: 40px;
+    text-shadow:
+        2px 2px 0px black,
+        -2px -2px 0px black,
+        2px -2px 0px black,
+        -2px 2px 0px black;
+}
+
+.column-btn {
+    font-family: "Jersey 10", sans-serif;
+    font-size: 16px;
+    background-color: white;
+    color: #C7522A;
+    padding: 10px 20px;
+    border: #C7522A 3px solid;
+
+}
+
+.note-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.note-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.note {
+    color: white;
+    font-size: 20px;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
+    margin: 10px 0;
+}
+
+.toggle-theme {
+    cursor: pointer;
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+
+#game-section{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-section-title {
+    color: white;
+    font-size: 100px;
+    text-shadow: 
+      2px 2px 0px #C7522A,  
+      -2px -2px 0px #C7522A, 
+      2px -2px 0px #C7522A, 
+      -2px 2px 0px #C7522A;
+}
+
+#scoreText {
+    color: white;
+    font-size: 20px;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
+    margin-bottom: 10px;
+}
+
+#scoreText {
+    font-size: 28px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#pauseText {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    display: none;
+}
+
+#gameContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#gameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+canvas {
+    background-color: #70c5ce;
+    border: 1px solid black;
+}
+
+#recordPanel {
+    color: white;
+    font-size: 20px;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
+}
+
+#recordPanel h2 {
+    margin: 0;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#recordText {
+    white-space: pre-line;
+    overflow-y: auto;
+    max-height: 300px;
+    width: 100%;
+    text-align: center;
+}

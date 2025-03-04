@@ -165,9 +165,9 @@ function gameLoop() {
 
     if (!birdAlive) {
         ctx.fillStyle = 'black';
-        ctx.font = '30px Arial';
-        ctx.fillText('Вы проиграли!', canvas.width / 2 - 100, canvas.height / 2);
-        ctx.fillText('Счет: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
+        ctx.font = '45px Arial';
+        ctx.fillText('You LOOSE))))))', canvas.width / 2 - 100, canvas.height / 2);
+        ctx.fillText('Score: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
         updateHighScores();
         return;
     }
@@ -181,7 +181,7 @@ function gameLoop() {
         if (!pipe.passed && pipe.x + PIPE_WIDTH < bird.x) {
             score++;
             pipe.passed = true;
-            document.getElementById("scoreText").innerText = 'Счет: ' + score;
+            document.getElementById("scoreText").innerText = 'Score: ' + score;
         }
         if (pipe.isOffScreen()) {
             pipes.shift();
