@@ -166,6 +166,10 @@ body.dark-theme .column-btn {
       border: 3px solid #F0DAA5;
 }
 
+body.dark-theme .note-input {
+      border: 3px solid #74A892;
+}
+
 .note-list {
       max-height: 400px;
       overflow-y: auto;
@@ -197,6 +201,12 @@ body.dark-theme .column-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
+}
+
+.game {
+      display: flex;
+      flex-direction: row-reverse;
+      margin-left: 100px;
 }
 
 .game-section-title {
@@ -260,6 +270,11 @@ body.dark-theme canvas {
       color: white;
       border: none;
       cursor: pointer;
+}
+
+.column-score-column {
+      width: 400px;
+      padding-left: 100px;
 }
 
 /* body {
