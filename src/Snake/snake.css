@@ -2,6 +2,7 @@
 
 *{
       margin: 0;
+      padding: 0;
 }
 
 ul {
@@ -49,12 +50,20 @@ body.dark-theme {
       border-radius: 50px;
 }
 
+body.dark-theme .burger-menu {
+      background-color: #74A892;
+}
+
 .burger-bar {
       width: 17px;
       height: 4px;
       border-radius: 6px;
       background-color: #C7522A;
       transition: transform 0.3s ease;
+}
+
+body.dark-theme .burger-bar {
+      background-color: #004343;
 }
 
 .menu {
@@ -71,6 +80,10 @@ body.dark-theme {
       padding-left: 55px;
       transition: left 0.3s ease;
       z-index: 1000;
+}
+
+body.dark-theme .menu {
+      background-color: #74A892;
 }
 
 .menu a {
@@ -130,6 +143,11 @@ body.dark-theme {
 
 }
 
+body.dark-theme .column-btn {
+      color: #74A892;
+      border: #74A892 3px solid;
+}
+
 .note-input {
       width: 100%;
       padding: 10px;
@@ -180,6 +198,14 @@ body.dark-theme {
         -2px 2px 0px #C7522A;
 }
 
+body.dark-theme .game-section-title {
+      text-shadow: 
+        2px 2px 0px #74A892,  
+        -2px -2px 0px #74A892, 
+        2px -2px 0px #74A892, 
+        -2px 2px 0px #74A892;
+}
+
 .game-section-text {
       color: white;
       font-size: 20px;
@@ -205,4 +231,8 @@ canvas {
       border: 8px solid #F0DAA5;
       display: block;
       margin: 0 auto;
+}
+
+body.dark-theme canvas {
+      border: 8px solid #008585;
 }
