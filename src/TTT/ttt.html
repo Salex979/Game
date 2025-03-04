@@ -6,28 +6,59 @@
     <title>Крестики-Нолики с ИИ</title>
     <link rel="stylesheet" href="ttt.css">
 </head>
-<body>
-    <h1>Крестики-Нолики с ИИ</h1>
-    
-    <table id="gameBoard">
-        <tr>
-            <td id="cell-0"></td>
-            <td id="cell-1"></td>
-            <td id="cell-2"></td>
-        </tr>
-        <tr>
-            <td id="cell-3"></td>
-            <td id="cell-4"></td>
-            <td id="cell-5"></td>
-        </tr>
-        <tr>
-            <td id="cell-6"></td>
-            <td id="cell-7"></td>
-            <td id="cell-8"></td>
-        </tr>
-    </table>
+<body class="light-theme">
+
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+    </div>
+
+    <div class="menu" id="menu">
+        <a href="#" onclick="toggleTheme()">Change mode</a>
+        <a href="/src/Main/main.html">Main</a>
+    </div>
+
+    <div id="main-container">
+        <div class="column note-column">
+            <h3 class="column-title">Notes</h3>
+            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
+            <button class="column-btn" onclick="addNote()">Add note</button>
+            <div class="note-list" id="note-list"></div>
+        </div>
+
+        <div class="game-section">
+            <h1 class="game-section-title">Крестики-Нолики с ИИ</h1>
+            <table id="gameBoard">
+                <tr>
+                    <td id="cell-0"></td>
+                    <td id="cell-1"></td>
+                    <td id="cell-2"></td>
+                </tr>
+                <tr>
+                    <td id="cell-3"></td>
+                    <td id="cell-4"></td>
+                    <td id="cell-5"></td>
+                </tr>
+                <tr>
+                    <td id="cell-6"></td>
+                    <td id="cell-7"></td>
+                    <td id="cell-8"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="column score-column">
+            <h3 class="column-title">Rating</h3>
+            <ul id="scoreList"></ul>
+            <button class="column-btn" id="clearButton">Clear rating</button>
+        </div>
+    </div>
     
     <button id="restartButton">Начать заново</button>
+    
     <script src="ttt.js"></script>
+    <script src="script.js"></script>
+    <script src="/src/Main/timer.js"></script>
 </body>
 </html>
