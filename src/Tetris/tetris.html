@@ -6,8 +6,51 @@
     <link rel="stylesheet" href="tetris.css"> 
 </head>
 <!--ТЕТРИС-->
-<body>
-    <div id="score">Счет: 0</div>
+<body class="light-theme">
+
+    <div class="burger-menu">
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+    </div>
+
+    <div class="menu" id="menu">
+        <a href="#" id="theme-toggle">Change mode</a>
+        <a href="/src/Main/main.html">Main</a>
+    </div>
+
+    <div id="main-container">
+        <div class="column note-column">
+            <h3 class="column-title">Notes</h3>
+            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
+            <button class="column-btn" id="add-note-btn">Add note</button>
+            <div class="note-list" id="note-list"></div>
+        </div>
+
+        <div class="game-section">
+            <h1 class="game-section-title">Tetris</h1>
+            <div class="game-section-text">
+                <div id="scoreBoard">Score: 0</div>
+            </div>
+            <canvas id="gameCanvas" width="200" height="400"></canvas>
+            <div id="next-piece-container">
+                <h3>Next figure:</h3>
+                <canvas id="next-piece-canvas" width="80" height="80"></canvas>
+            </div>
+            <div id="recordMessage" style="display: none;"></div>
+        </div>
+
+        <button id="pause-button" class="pause-button">Пауза</button> 
+           
+        <div class="column score-column">
+            <h3 class="column-title">Rating</h3>
+            <ul id="scoreList"></ul>
+            <button class="column-btn" id="clearButton">Clear rating</button>
+            <div class="game-over" style="display: none;">Игра окончена!</div>
+        </div>
+    </div>
+
+    <!-- <div id="score">Счет: 0</div>
     <div id="game-container">
         <canvas id="tetris" width="200" height="400"></canvas>
         <div id="next-piece-container">
@@ -16,8 +59,9 @@
         </div>
     </div>
     <button id="pause-button">Пауза</button>
-    <div class="game-over" style="display: none;">Игра окончена!</div>
+    <div class="game-over" style="display: none;">Игра окончена!</div> -->
 
     <script src="tetris.js"></script> 
+    <script src="script.js"></script> 
 </body>
 </html>
