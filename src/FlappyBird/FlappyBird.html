@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="bird.css">
 </head>
 <body class="light-theme">
-    <div class="burger-menu" onclick="toggleMenu()">
+    <div class="burger-menu">
         <div class="burger-bar"></div>
         <div class="burger-bar"></div>
         <div class="burger-bar"></div>
     </div>
 
     <div class="menu" id="menu">
-        <a href="#" onclick="toggleTheme()">Mode</a>
+        <a href="#" id="theme-toggle">Mode</a>
         <a href="#">Main</a>
     </div>
 
@@ -23,7 +23,7 @@
         <div class="column note-column">
             <h3 class="column-title">Notes</h3>
             <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
-            <button class="column-btn" onclick="addNote()">Add note</button>
+            <button class="column-btn" id="add-note-btn">Add note</button>
             <div class="note-list" id="note-list"></div>
         </div>
 
