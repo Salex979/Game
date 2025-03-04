@@ -13,14 +13,30 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     const themeToggleBtn = document.getElementById("theme-toggle");
 
+    // Проверяем, есть ли сохранённая тема в localStorage
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme) {
+        document.body.classList.add(savedTheme);
+    } else {
+        document.body.classList.add("light-theme"); // Тема по умолчанию
+    }
+
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener("click", function (event) {
             event.preventDefault();
+            
+            // Переключаем классы тем
             document.body.classList.toggle("dark-theme");
             document.body.classList.toggle("light-theme");
+
+            // Определяем текущую тему и сохраняем в localStorage
+            const currentTheme = document.body.classList.contains("dark-theme") ? "dark-theme" : "light-theme";
+            localStorage.setItem("theme", currentTheme);
         });
     }
 });
+
 
 
 // Добавление заметки

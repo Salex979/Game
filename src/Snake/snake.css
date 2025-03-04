@@ -17,7 +17,7 @@ body {
       font-style: normal;
       margin: 0;
       padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.light-theme {
@@ -163,6 +163,10 @@ body.dark-theme .column-btn {
       padding: 10px;
       margin-bottom: 10px;
       border: 3px solid #F0DAA5;
+}
+
+body.dark-theme .note-input {
+      border: 3px solid #74A892;
 }
 
 .note-list {
