@@ -40,11 +40,14 @@ class Game2048 {
         this.currentMoveSound = 0;
         
         this.sounds = {
-            gameOver: new Audio('../../assets/sounds/game_over.mp3')
+            gameOver: new Audio('../../assets/sounds/game_over.mp3'),
+            merge: new Audio('../../assets/sounds/moving.mp3')
         };
         
         this.sounds.gameOver.volume = 0.3;
         this.sounds.gameOver.load();
+        this.sounds.merge.volume = 0.4;
+        this.sounds.merge.load();
     }
 
     playSound(soundName) {
@@ -74,6 +77,9 @@ class Game2048 {
         document.getElementById('final-score').textContent = this.score;
         document.getElementById('final-best-score').textContent = this.bestScore;
         modal.classList.add('active');
+        
+        // Add pixel effect to the modal
+        modal.style.animation = 'pixelFadeIn 0.5s';
     }
 
     hideGameOverModal() {
@@ -113,6 +119,10 @@ class Game2048 {
                 tile.className = 'tile new';
                 tile.textContent = value;
                 tile.dataset.value = value;
+                
+                // Add pixel art effect
+                this.addPixelEffect(tile, value);
+                
                 cell.appendChild(tile);
                 
                 // Remove the 'new' class after animation completes
@@ -122,9 +132,47 @@ class Game2048 {
             }
         });
     }
+    
+    addPixelEffect(tile, value) {
+        // Add pixel border effect based on value
+        const borderColors = {
+            2: '#d6c0b4',
+            4: '#d8c0a8',
+            8: '#d88a54',
+            16: '#d87c3c',
+            32: '#d85a37',
+            64: '#d83c14',
+            128: '#d8c34b',
+            256: '#d8c13c',
+            512: '#d8be28',
+            1024: '#d8bb14',
+            2048: '#d8b800'
+        };
+        
+        const borderColor = borderColors[value] || '#d8b800';
+        tile.style.borderColor = borderColor;
+        
+        // Add pixel shadow
+        if (value >= 8) {
+            tile.style.boxShadow = `0 0 0 2px ${borderColor}`;
+        }
+    }
 
     updateScore() {
-        document.getElementById('score').textContent = this.score;
+        const scoreElement = document.getElementById('score');
+        const oldScore = parseInt(scoreElement.textContent);
+        const newScore = this.score;
+        
+        // Animate score change with a pixel effect
+        if (newScore > oldScore) {
+            scoreElement.classList.add('score-change');
+            setTimeout(() => {
+                scoreElement.classList.remove('score-change');
+            }, 300);
+        }
+        
+        scoreElement.textContent = newScore;
+        
         if (this.score > this.bestScore) {
             this.bestScore = this.score;
             localStorage.setItem('bestScore', this.bestScore);
@@ -199,131 +247,158 @@ class Game2048 {
         }
     }
 
-    compressGrid(grid) {
-        const newGrid = Array(4).fill().map(() => Array(4).fill(0));
-        
-        for (let i = 0; i < 4; i++) {
-            let colIndex = 0;
-            for (let j = 0; j < 4; j++) {
-                if (grid[i][j] !== 0) {
-                    newGrid[i][colIndex] = grid[i][j];
-                    colIndex++;
-                }
-            }
-        }
-        return newGrid;
-    }
-
-    mergeGrid(grid) {
-        let merged = false;
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 3; j++) {
-                if (grid[i][j] !== 0 && grid[i][j] === grid[i][j + 1]) {
-                    grid[i][j] *= 2;
-                    this.score += grid[i][j];
-                    grid[i][j + 1] = 0;
-                    merged = true;
-                    
-                    // Add merge animation
-                    const cell = document.querySelector(`.grid-cell[data-row="${i}"][data-col="${j}"]`);
-                    if (cell) {
-                        const tile = cell.querySelector('.tile');
-                        if (tile) {
-                            tile.classList.add('merged');
-                            setTimeout(() => {
-                                tile.classList.remove('merged');
-                            }, 150);
-                        }
-                    }
-                    
-                    this.playSound('move');
-                }
-            }
-        }
-        return merged;
-    }
-
-    rotateGrid(grid) {
-        const newGrid = Array(4).fill().map(() => Array(4).fill(0));
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                newGrid[i][j] = grid[3 - j][i];
-            }
-        }
-        return newGrid;
-    }
-
     moveLeft() {
-        let oldGrid = JSON.stringify(this.grid);
-        
-        this.grid = this.compressGrid(this.grid);
-
-        let merged = this.mergeGrid(this.grid);
-
-        this.grid = this.compressGrid(this.grid);
-        
-        return oldGrid !== JSON.stringify(this.grid);
+        let moved = false;
+        for (let i = 0; i < 4; i++) {
+            const row = this.grid[i].filter(val => val !== 0);
+            const newRow = [];
+            for (let j = 0; j < row.length; j++) {
+                if (j + 1 < row.length && row[j] === row[j + 1]) {
+                    newRow.push(row[j] * 2);
+                    this.score += row[j] * 2;
+                    j++;
+                    moved = true;
+                    this.playSound('merge');
+                } else {
+                    newRow.push(row[j]);
+                }
+            }
+            while (newRow.length < 4) {
+                newRow.push(0);
+            }
+            if (JSON.stringify(this.grid[i]) !== JSON.stringify(newRow)) {
+                moved = true;
+            }
+            this.grid[i] = newRow;
+        }
+        return moved;
     }
 
     moveRight() {
-        let oldGrid = JSON.stringify(this.grid);
-        
-        this.grid = this.rotateGrid(this.rotateGrid(this.grid));
-        
-        let moved = this.moveLeft();
-        
-        this.grid = this.rotateGrid(this.rotateGrid(this.grid));
-        
-        return oldGrid !== JSON.stringify(this.grid);
+        let moved = false;
+        for (let i = 0; i < 4; i++) {
+            const row = this.grid[i].filter(val => val !== 0);
+            const newRow = Array(4).fill(0);
+            let idx = 3;
+            for (let j = row.length - 1; j >= 0; j--) {
+                if (j - 1 >= 0 && row[j] === row[j - 1]) {
+                    newRow[idx] = row[j] * 2;
+                    this.score += row[j] * 2;
+                    j--;
+                    moved = true;
+                    this.playSound('merge');
+                } else {
+                    newRow[idx] = row[j];
+                }
+                idx--;
+            }
+            if (JSON.stringify(this.grid[i]) !== JSON.stringify(newRow)) {
+                moved = true;
+            }
+            this.grid[i] = newRow;
+        }
+        return moved;
     }
 
     moveUp() {
-        let oldGrid = JSON.stringify(this.grid);
-        
-        this.grid = this.rotateGrid(this.rotateGrid(this.rotateGrid(this.grid)));
-        
-        let moved = this.moveLeft();
-        
-        this.grid = this.rotateGrid(this.grid);
-        
-        return oldGrid !== JSON.stringify(this.grid);
+        let moved = false;
+        for (let j = 0; j < 4; j++) {
+            const col = [];
+            for (let i = 0; i < 4; i++) {
+                if (this.grid[i][j] !== 0) {
+                    col.push(this.grid[i][j]);
+                }
+            }
+            const newCol = [];
+            for (let i = 0; i < col.length; i++) {
+                if (i + 1 < col.length && col[i] === col[i + 1]) {
+                    newCol.push(col[i] * 2);
+                    this.score += col[i] * 2;
+                    i++;
+                    moved = true;
+                    this.playSound('merge');
+                } else {
+                    newCol.push(col[i]);
+                }
+            }
+            while (newCol.length < 4) {
+                newCol.push(0);
+            }
+            for (let i = 0; i < 4; i++) {
+                if (this.grid[i][j] !== newCol[i]) {
+                    moved = true;
+                }
+                this.grid[i][j] = newCol[i];
+            }
+        }
+        return moved;
     }
 
     moveDown() {
-        let oldGrid = JSON.stringify(this.grid);
-        
-        this.grid = this.rotateGrid(this.grid);
-        
-        let moved = this.moveLeft();
-        
-        this.grid = this.rotateGrid(this.rotateGrid(this.rotateGrid(this.grid)));
-        
-        return oldGrid !== JSON.stringify(this.grid);
+        let moved = false;
+        for (let j = 0; j < 4; j++) {
+            const col = [];
+            for (let i = 0; i < 4; i++) {
+                if (this.grid[i][j] !== 0) {
+                    col.push(this.grid[i][j]);
+                }
+            }
+            const newCol = Array(4).fill(0);
+            let idx = 3;
+            for (let i = col.length - 1; i >= 0; i--) {
+                if (i - 1 >= 0 && col[i] === col[i - 1]) {
+                    newCol[idx] = col[i] * 2;
+                    this.score += col[i] * 2;
+                    i--;
+                    moved = true;
+                    this.playSound('merge');
+                } else {
+                    newCol[idx] = col[i];
+                }
+                idx--;
+            }
+            for (let i = 0; i < 4; i++) {
+                if (this.grid[i][j] !== newCol[i]) {
+                    moved = true;
+                }
+                this.grid[i][j] = newCol[i];
+            }
+        }
+        return moved;
     }
 
     isGameOver() {
+        // Check if there are any empty cells
         for (let i = 0; i < 4; i++) {
             for (let j = 0; j < 4; j++) {
-                if (this.grid[i][j] === 0) return false;
-            }
-        }
-        for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 4; j++) {
-                const current = this.grid[i][j];
-                if ((j < 3 && current === this.grid[i][j + 1]) ||
-                    (i < 3 && current === this.grid[i + 1][j])) {
+                if (this.grid[i][j] === 0) {
                     return false;
                 }
             }
         }
+        
+        // Check if there are any adjacent equal values
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                const val = this.grid[i][j];
+                // Check right
+                if (j < 3 && this.grid[i][j + 1] === val) {
+                    return false;
+                }
+                // Check down
+                if (i < 3 && this.grid[i + 1][j] === val) {
+                    return false;
+                }
+            }
+        }
+        
         return true;
     }
 
     saveGameState() {
         const gameState = {
             grid: this.grid,
-            score: this.score,
-            bestScore: this.bestScore
+            score: this.score
         };
         localStorage.setItem('gameState', JSON.stringify(gameState));
     }
@@ -331,10 +406,9 @@ class Game2048 {
     loadGameState() {
         const savedState = localStorage.getItem('gameState');
         if (savedState) {
-            const state = JSON.parse(savedState);
-            this.grid = state.grid;
-            this.score = state.score;
-            this.bestScore = state.bestScore;
+            const gameState = JSON.parse(savedState);
+            this.grid = gameState.grid;
+            this.score = gameState.score;
             return true;
         }
         return false;
@@ -343,4 +417,12 @@ class Game2048 {
 
 window.addEventListener('load', () => {
     new Game2048();
+    
+    // Add pixel art background effect
+    document.querySelectorAll('.grid-cell').forEach(cell => {
+        // Add random pixel noise to each cell
+        const noise = document.createElement('div');
+        noise.className = 'pixel-noise';
+        cell.appendChild(noise);
+    });
 });

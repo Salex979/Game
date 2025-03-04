@@ -11,7 +11,7 @@ body {
     font-style: normal;
     margin: 0;
     padding: 0;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 body.light-theme {
@@ -104,9 +104,9 @@ body.dark-theme .menu {
 
 #main-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-start;
-    margin-top: 30px;
+    margin-top: 70px;
     gap: 30px;
     padding: 0 20px;
 }
@@ -147,11 +147,19 @@ body.dark-theme .column-btn {
     border: #74A892 3px solid;
 }
 
+.note-column {
+    max-width: 400px;
+}
+
 .note-input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 3px solid #F0DAA5;
+}
+
+body.dark-theme .note-input {
+    border: 3px solid #74A892;
 }
 
 .note-list {
@@ -194,6 +202,7 @@ body.dark-theme .column-btn {
           -2px -2px 0px #C7522A,
           2px -2px 0px #C7522A,
           -2px 2px 0px #C7522A;
+    margin-bottom: 40px;
 }
 
 body.dark-theme .game-section-title {
@@ -212,22 +221,33 @@ table {
 td {
     width: 100px;
     height: 100px;
-    border: 2px solid white;
+    border: 2px solid #C7522A;
+    background-color: white;
     cursor: pointer;
     font-size: 60px;
     line-height: 100px;
     text-align: center;
 }
 
+body.dark-theme td {
+    border: 2px solid #74A892;
+}
+
 .player-o {
-    color: rgb(151, 42, 151);
+    color: #004343;
 }
 
 #restartButton {
-    display: inline-block;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 16px;
+    background-color: white;
+    color: #C7522A;
     padding: 10px 20px;
-    background-color: lightgray;
-    border-radius: 5px;
-    cursor: pointer;
+    border: #C7522A 3px solid;
     margin-top: 20px;
+}
+
+body.dark-theme #restartButton {
+    color: #74A892;
+    border: #74A892 3px solid;
 }
