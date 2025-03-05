@@ -255,3 +255,4 @@ highScore = localStorage.getItem("highScore") || 0; // Загружаем пре
 
 // Запуск главного игрового цикла
 gameLoop();
+module.exports = { generateFood, update, endGame };

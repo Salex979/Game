@@ -1,0 +1,19 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "main": "mainsnake.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "canvas": "^3.1.0",
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
