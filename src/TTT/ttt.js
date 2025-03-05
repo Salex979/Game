@@ -2,11 +2,11 @@ const cells = document.querySelectorAll('#gameBoard td');
 let currentPlayer = 'X'; // Начинает игрок X
 let gameOver = false;
 
-// Функции проверки наличия двух символов в строке
-function hasTwoInRow(player, row) {
-    return row.filter(cell => cell === player).length === 2 &&
-        row.includes('');
-}
+        // Функции проверки наличия двух символов в строке
+        function hasTwoInRow(player, row) {
+            return row.filter(cell => cell === player).length === 2 &&
+                   row.includes('');
+        }
 
 // Стратегия ИИ
 function getAIPlay() {
@@ -68,22 +68,22 @@ function playerMove(event) {
         event.target.textContent = currentPlayer;
         event.target.classList.add(`player-${currentPlayer}`);
 
-        const winner =
-            checkWin();
-        if (winner) {
-            alert(`${winner} победил!`);
-            gameOver = true;
-        } else if (Array.from(cells).every(cell => cell.textContent)) {
-            alert("Ничья!");
-            gameOver = true;
-        } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            if (currentPlayer === 'O') {
-                setTimeout(computerMove, 500); // Задержка для визуального эффекта
+                const winner =
+                checkWin();
+                if (winner) {
+                    alert(`${winner} победил!`);
+                    gameOver = true;
+                } else if (Array.from(cells).every(cell => cell.textContent)) {
+                    alert("Ничья!");
+                    gameOver = true;
+                } else {
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    if (currentPlayer === 'O') {
+                        setTimeout(computerMove, 500); // Задержка для визуального эффекта
+                    }
+                }
             }
         }
-    }
-}
 
 // Проверка на победу
 function checkWin() {
@@ -117,16 +117,6 @@ function restartGame() {
     gameOver = false;
 }
 
-// Добавление обработчиков событий
-cells.forEach(cell => cell.addEventListener('click', playerMove));
-const restartButton = document.getElementById('restartButton');
-
-console.log("🔍 restartButton в ttt.js:", restartButton); // Лог для проверки
-
-if (restartButton) {
-    restartButton.addEventListener('click', restartGame);
-} else {
-    console.warn("⚠️ restartButton не найден в ttt.js!");
-}
-module.exports = { checkWin, playerMove, computerMove, restartGame, getAIPlay };
-
+        // Добавление обработчиков событий
+        cells.forEach(cell => cell.addEventListener('click', playerMove));
+        document.getElementById('restartButton').addEventListener('click', restartGame);
