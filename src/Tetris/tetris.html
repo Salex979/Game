@@ -32,23 +32,24 @@
             <div class="game-section-text">
                 <div id="scoreBoard">Score: 0</div>
             </div>
-            <div class="game-section-item">
-                <canvas id="gameCanvas" width="200" height="400"></canvas>
+            <div class="game">
                 <div id="next-piece-container">
-                    <h3 class="next-piece-title">Next figure:</h3>
+                    <h3>Next figure:</h3>
                     <canvas id="next-piece-canvas" width="80" height="80"></canvas>
                 </div>
-            </div>
-            <div id="recordMessage" style="display: none;"></div>
+                <canvas id="gameCanvas" width="200" height="400"></canvas>
+            
+                <div id="recordMessage" style="display: none;"></div>
+        </div>
         </div>
 
-        <button id="pause-button" class="pause-button">Pause</button> 
-           
-        <div class="column score-column">
+        <button id="pause-button" class="pause-button">Пауза</button> 
+
+        <div class="column-score-column">
             <h3 class="column-title">Rating</h3>
             <ul id="scoreList"></ul>
             <button class="column-btn" id="clearButton">Clear rating</button>
-            <div class="game-over" style="display: none;">Game over!</div>
+            
         </div>
     </div>
 

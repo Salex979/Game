@@ -115,7 +115,7 @@ body.dark-theme .menu {
       justify-content: center;
       align-items: flex-start;
       margin-top: 30px;
-      gap: 30px;
+
       padding: 0 20px;
 }
 
@@ -203,6 +203,12 @@ body.dark-theme .note-input {
       align-items: center;
 }
 
+.game {
+      display: flex;
+      flex-direction: row-reverse;
+      margin-left: 100px;
+}
+
 .game-section-title {
       color: white;
       font-size: 100px;
@@ -253,7 +259,7 @@ canvas {
       border: 8px solid #F0DAA5;
       display: block;
       margin: 0 auto;
-      background-color: whitesmoke;
+      background-color: #FBF2C4;
 }
 
 body.dark-theme canvas {
@@ -292,6 +298,12 @@ body.dark-theme canvas {
       color: white;
       border: none;
       cursor: pointer;
+}
+
+.column-score-column {
+      width: 400px;
+      padding-left: 100px;
+      padding-top: 170px;
 }
 
 /* body {
