@@ -1,4 +1,5 @@
 let timerPaused = false;
+let notifiedMinutes = new Set();
 
 // Запуск таймера при загрузке страницы
 document.addEventListener("DOMContentLoaded", function () {
@@ -53,6 +54,7 @@ function checkTimer() {
     if (storedTime && startTime) {
         let timePassed = Math.floor((Date.now() - startTime) / 1000);
         let timeLeft = storedTime - timePassed;
+        let minutesLeft = Math.floor(timeLeft / 60);
 
         if (timeLeft <= 0) {
             showAlert(); // Показываем всплывающее окно
@@ -62,12 +64,33 @@ function checkTimer() {
         } else {
             let timerDisplay = document.getElementById("time-left");
             if (timerDisplay) {
-                timerDisplay.innerText = `${Math.floor(timeLeft / 60)} : ${timeLeft % 60}`;
+                timerDisplay.innerText = `${minutesLeft} : ${timeLeft % 60}`;
             }
+
+            // Проверяем, осталось ли ровно 10, 20, 30... минут
+            if (minutesLeft > 0 && minutesLeft % 10 === 0 && !notifiedMinutes.has(minutesLeft)) {
+                notifiedMinutes.add(minutesLeft);
+                window.showSpeechBubble(`Осталось ${minutesLeft} минут!`);
+            }
+
             setTimeout(checkTimer, 1000);
         }
     }
 }
+
+window.getTimeLeft = function () {
+    let storedTime = localStorage.getItem("timer");
+    let startTime = localStorage.getItem("timerStarted");
+
+    if (storedTime && startTime) {
+        let timePassed = Math.floor((Date.now() - startTime) / 1000);
+        let timeLeft = storedTime - timePassed;
+
+        return timeLeft > 0 ? timeLeft : 0;
+    }
+    return 0;
+};
+
 
 // Функция для всплывающего окна
 function showAlert() {
