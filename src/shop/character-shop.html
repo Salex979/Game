@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин одежды</title>
+    <link rel="stylesheet" href="/src/TTT/ttt.css">
+    <link rel="stylesheet" href="shop.css">
+</head>
+<body class="light-theme">
+    <div id="coins-display" class="coins-display"></div>
+
+    <div class="burger-menu">
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+        <div class="burger-bar"></div>
+    </div>
+
+    <div class="menu" id="menu">
+        <a href="#" id="theme-toggle">Change mode</a>
+        <a href="/src/Main/main.html">Main</a>
+        <a href="/src/TTT/ttt.html">Tic-Tac-Toe</a>
+    </div>
+
+    <div class="shop-container">
+        <h1 class="shop-title">Магазин одежды</h1>
+        
+        <div class="items-grid">
+            <!-- Карточка товара 1 -->
+            <div class="item-card" data-item-id="body-green" data-price="50">
+                <div class="character-preview" id="preview-green"></div>
+                <div class="item-info">
+                    <h3 class="item-name">Зеленый костюм</h3>
+                    <p class="item-price">50 монет</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
+            </div>
+            
+            <!-- Карточка товара 2 -->
+            <div class="item-card" data-item-id="body-blue" data-price="75">
+                <div class="character-preview" id="preview-blue"></div>
+                <div class="item-info">
+                    <h3 class="item-name">Синий костюм</h3>
+                    <p class="item-price">75 монет</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
+            </div>
+            
+            <!-- Карточка товара 3 -->
+            <div class="item-card" data-item-id="body-red" data-price="100">
+                <div class="character-preview" id="preview-red"></div>
+                <div class="item-info">
+                    <h3 class="item-name">Красный костюм</h3>
+                    <p class="item-price">100 монет</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
+            </div>
+            
+            <!-- Карточка товара 4 -->
+            <div class="item-card" data-item-id="body-gold" data-price="150">
+                <div class="character-preview" id="preview-gold"></div>
+                <div class="item-info">
+                    <h3 class="item-name">Золотой костюм</h3>
+                    <p class="item-price">150 монет</p>
+                    <button class="buy-btn">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/Main/three.min.js"></script>
+    <script src="/src/Main/person.js"></script>
+    <script src="/src/Main/coins-system.js"></script>
+    <script src="shop.js"></script>
+</body>
+</html>

@@ -9,8 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     container.style.cursor = 'pointer';
     container.addEventListener('click', () => {
-        window.location.href = 'character-shop.html'; // Переход на страницу магазина
+        window.location.href = 'shop/character-shop.html'; // Переход на страницу магазина
     });
+
+    let characterMaterials = {
+        body: null,
+        head: null,
+        eyes: null
+    };
 
     // Свет
     const light = new THREE.DirectionalLight(0xD3D3D3, 0.85);
