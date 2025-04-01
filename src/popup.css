@@ -24,3 +24,12 @@ body {
       width: 64px;
       height: 64px;
 }
+
+.login-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 10px;
+  }
+
+  
