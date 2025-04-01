@@ -1,3 +1,54 @@
+let coins = parseInt(localStorage.getItem('gameCoins')) || 0;
+let lastCoinScore = 0;
+
+function updateCoins(amount) {
+    coins += amount;
+    localStorage.setItem('gameCoins', coins);
+    updateCoinDisplay();
+    animateCoins();
+}
+
+function updateCoinDisplay() {
+    const display = document.getElementById('coins-display');
+    if (display) {
+        display.innerHTML = `🪙 <span class="coins-count">${coins}</span>`;
+    }
+}
+
+function animateCoins() {
+    const display = document.getElementById('coins-display');
+    if (display) {
+        display.classList.add('coin-animation');
+        setTimeout(() => {
+            display.classList.remove('coin-animation');
+        }, 800);
+    }
+}
+
+function checkCoinReward() {
+    if (score >= lastCoinScore + 100) {
+        const coinsToAdd = Math.floor((score - lastCoinScore) / 100) * 50;
+        updateCoins(coinsToAdd);
+        lastCoinScore = score - (score % 100);
+        showCoinMessage(`+${coinsToAdd} монет!`);
+    }
+}
+
+function showCoinMessage(message) {
+    const coinMessage = document.createElement('div');
+    coinMessage.className = 'coin-message';
+    coinMessage.textContent = message;
+    document.body.appendChild(coinMessage);
+    
+    setTimeout(() => {
+        coinMessage.classList.add('show');
+        setTimeout(() => {
+            coinMessage.classList.remove('show');
+            setTimeout(() => coinMessage.remove(), 500);
+        }, 1500);
+    }, 100);
+}
+
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const nextCanvas = document.getElementById('next-piece-canvas');
@@ -100,6 +151,7 @@ function clearLines() {
     }
     score += linesCleared * 10;
     updateScore();
+    checkCoinReward();
 }
 
 function updateScore() {
@@ -145,6 +197,7 @@ function initGame() {
     interval = setInterval(moveDown, 500);
     document.addEventListener('keydown', handleKeyPress);
     updateScore();
+    updateCoinDisplay();
     draw();
     drawNextPiece();
 }

@@ -23,6 +23,44 @@ let pipes = [];
 let frame = 0;
 let gamePaused = false;
 let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+let coins = parseInt(localStorage.getItem('gameCoins')) || 0;
+let lastCoinScore = 0; // Для отслеживания, когда давать монеты
+
+// Система монет
+function updateCoins(amount) {
+    coins += amount;
+    localStorage.setItem('gameCoins', coins);
+    updateCoinDisplay();
+    animateCoins();
+}
+
+function updateCoinDisplay() {
+    const display = document.getElementById('coins-display');
+    if (display) {
+        display.innerHTML = `🪙 <span class="coins-count">${coins}</span>`;
+    }
+}
+
+function animateCoins() {
+    const display = document.getElementById('coins-display');
+    if (display) {
+        display.classList.add('coin-animation');
+        setTimeout(() => {
+            display.classList.remove('coin-animation');
+        }, 800);
+    }
+}
+
+// Инициализация отображения монет
+function initCoinDisplay() {
+    if (!document.getElementById('coins-display')) {
+        const coinsDisplay = document.createElement('div');
+        coinsDisplay.id = 'coins-display';
+        coinsDisplay.className = 'coins-display';
+        document.body.prepend(coinsDisplay);
+    }
+    updateCoinDisplay();
+}
 
 // Загрузка изображений
 const birdUpImage = new Image();
@@ -98,7 +136,6 @@ function Pipe(x) {
         if (ctx && bottomPipeImage.complete) {
             ctx.drawImage(bottomPipeImage, this.x, canvas.height - this.bottomHeight, PIPE_WIDTH, this.bottomHeight);
         }
-        
     };
 
     this.update = function() {
@@ -149,6 +186,7 @@ function togglePause() {
 function restartGame() {
     birdAlive = true;
     score = 0;
+    lastCoinScore = 0;
     pipes = [];
     frame = 0;
     bird.y = birdY;
@@ -156,6 +194,29 @@ function restartGame() {
     gamePaused = false;
     document.getElementById("scoreText").innerText = 'Score: ' + score;
     gameLoop();
+}
+
+// Проверка и начисление монет за каждые 10 очков
+function checkCoinReward() {
+    if (score >= lastCoinScore + 10) {
+        const coinsToAdd = Math.floor((score - lastCoinScore) / 10) * 5;
+        updateCoins(coinsToAdd);
+        lastCoinScore = score - (score % 10);
+        
+        // Показываем сообщение о получении монет
+        const message = document.createElement('div');
+        message.className = 'coin-message';
+        message.textContent = `+${coinsToAdd} монет!`;
+        document.body.appendChild(message);
+        
+        setTimeout(() => {
+            message.classList.add('show');
+            setTimeout(() => {
+                message.classList.remove('show');
+                setTimeout(() => message.remove(), 500);
+            }, 1500);
+        }, 100);
+    }
 }
 
 // Обновление таблицы рекордов
@@ -176,12 +237,11 @@ function gameLoop() {
     if (ctx && backgroundImage && backgroundImage.complete) {
         ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
     }
-    
 
     if (!birdAlive) {
         ctx.fillStyle = 'black';
         ctx.font = '40px Arial';
-        ctx.fillText('YOU LOOSE', canvas.width / 2 - 100, canvas.height / 2);
+        ctx.fillText('GAME OVER', canvas.width / 2 - 100, canvas.height / 2);
         ctx.fillText('Score: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
         updateHighScores();
         return;
@@ -191,12 +251,14 @@ function gameLoop() {
     if (frame % 90 === 0) {
         pipes.push(new Pipe(canvas.width));
     }
+    
     pipes.forEach(function(pipe) {
         pipe.update();
         if (!pipe.passed && pipe.x + PIPE_WIDTH < bird.x) {
             score++;
-            pipe.passed = true;
             document.getElementById("scoreText").innerText = 'Score: ' + score;
+            checkCoinReward(); // Проверяем, нужно ли дать монеты
+            pipe.passed = true;
         }
         if (pipe.isOffScreen()) {
             pipes.shift();
@@ -205,13 +267,16 @@ function gameLoop() {
             birdAlive = false;
         }
     });
+    
     frame++;
     requestAnimationFrame(gameLoop);
 }
 
-// Запуск игры
+// Инициализация игры
+initCoinDisplay();
 gameLoop();
 
+// Проверка столкновений
 function checkCollision(bird, pipe) {
     return (
         bird.x < pipe.x + PIPE_WIDTH &&
@@ -220,7 +285,8 @@ function checkCollision(bird, pipe) {
     );
 }
 
+// Cообщений о монетах
+const coinMessageStyle = document.createElement('style');
+document.head.appendChild(coinMessageStyle);
 
 module.exports = { Bird, Pipe, restartGame, checkCollision };
-
-

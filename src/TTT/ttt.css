@@ -285,3 +285,49 @@ body.dark-theme #restartButton {
     opacity: 0; /* Начально скрыто */
     transition: opacity 1s ease; /* Плавное появление */
 }
+
+
+#coins-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 20px;
+    padding: 8px 15px;
+    background-color: inherit;
+    z-index: 1000;
+    text-shadow: 
+        1px 1px 1px black,
+        -1px -1px 1px black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    min-width: 100px;
+    text-align: center;
+    border: 2px solid #E5C185;
+}
+
+body.dark-theme #coins-display {
+    border-color: #74A892;
+    background-color: inherit;
+}
+
+/* Анимация при получении монет */
+@keyframes coinGain {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); color: gold; }
+    100% { transform: scale(1); }
+}
+
+.coin-animation {
+    animation: coinGain 0.8s ease;
+}
+
+.coins-count {
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#coins-display:hover {
+    background-color: white;
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
