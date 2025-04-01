@@ -3,97 +3,114 @@ document.addEventListener("DOMContentLoaded", () => {
     const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
     
     const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(200, 200); // Размер холста
+    renderer.setSize(200, 200);
     const container = document.getElementById("character-container");
     container.appendChild(renderer.domElement);
 
     container.style.cursor = 'pointer';
     container.addEventListener('click', () => {
-        window.location.href = 'shop/character-shop.html'; // Переход на страницу магазина
+        window.location.href = 'shop/character-shop.html';
     });
 
-    let characterMaterials = {
-        body: null,
-        head: null,
-        eyes: null
-    };
-
-    // Свет
+    // Освещение
     const light = new THREE.DirectionalLight(0xD3D3D3, 0.85);
     light.position.set(-1, 0, 7);
     light.castShadow = true;
-    light.shadow.mapSize.width = 1024;
-    light.shadow.mapSize.height = 1024;
-    light.shadow.radius = 4;
     scene.add(light);
 
-    // Материалы
-    const materialHead = new THREE.MeshStandardMaterial({ color: 0xADFF2F });
-    const materialBody = new THREE.MeshStandardMaterial({ color: 0x00A2E8 });
-    const materialLimb = new THREE.MeshStandardMaterial({ color: 0xADFF2F });
-    const materialEyes = new THREE.MeshStandardMaterial({ color: 0x000000 });
+    // Материалы персонажа (теперь доступны для изменения)
+    const materials = {
+        head: new THREE.MeshStandardMaterial({ color: 0xADFF2F }),
+        body: new THREE.MeshStandardMaterial({ color: 0x00A2E8 }),
+        limb: new THREE.MeshStandardMaterial({ color: 0xADFF2F }),
+        eyes: new THREE.MeshStandardMaterial({ color: 0x000000 }),
+        originalBody: null // Для сохранения оригинального цвета
+    };
 
-    // Голова
-    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 256, 256), materialHead);
+    // Создание частей тела (оригинальный персонаж без изменений)
+    const head = new THREE.Mesh(new THREE.SphereGeometry(0.5, 256, 256), materials.head);
     head.position.y = 1.6;
-    head.castShadow = true; // Голова отбрасывает тень
-    head.receiveShadow = true; // Голова принимает тень от других объектов
     scene.add(head);
 
-    // Глаза
-    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), materialEyes);
+    const leftEye = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), materials.eyes);
     leftEye.position.set(-0.15, 1.7, 0.5);
     scene.add(leftEye);
 
-    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), materialEyes);
+    const rightEye = new THREE.Mesh(new THREE.SphereGeometry(0.1, 32, 32), materials.eyes);
     rightEye.position.set(0.15, 1.7, 0.5);
     scene.add(rightEye);
 
-    // Короткое цилиндрическое тело
-    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.9, 256), materialBody);
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.9, 256), materials.body);
     body.position.y = 1;
-    body.castShadow = true; // Тело отбрасывает тень
-    body.receiveShadow = true; // Тело принимает тень
     scene.add(body);
 
-    // Руки с наклоном и закруглёнными концами
-    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.6, 64, 1, true), materialLimb);
+    const leftArm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.6, 64, 1, true), materials.limb);
     leftArm.position.set(-0.5, 0.97, 0);
     leftArm.rotation.z = -0.5;
-    leftArm.castShadow = true; // Рука отбрасывает тень
-    leftArm.receiveShadow = true; // Рука принимает тень
     scene.add(leftArm);
 
-    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.6, 64, 1, true), materialLimb);
+    const rightArm = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.6, 64, 1, true), materials.limb);
     rightArm.position.set(0.5, 0.97, 0);
     rightArm.rotation.z = 0.5;
-    rightArm.castShadow = true; // Рука отбрасывает тень
-    rightArm.receiveShadow = true; // Рука принимает тень
     scene.add(rightArm);
 
-    // Короткие ноги, ближе к телу
-    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.3, 64, 1, true), materialLimb);
+    const leftLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.3, 64, 1, true), materials.limb);
     leftLeg.position.set(-0.2, 0.57, 0);
-    leftLeg.castShadow = true; // Нога отбрасывает тень
-    leftLeg.receiveShadow = true; // Нога принимает тень
     scene.add(leftLeg);
 
-    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.3, 64, 1, true), materialLimb);
+    const rightLeg = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.3, 64, 1, true), materials.limb);
     rightLeg.position.set(0.2, 0.57, 0);
-    rightLeg.castShadow = true; // Нога отбрасывает тень
-    rightLeg.receiveShadow = true; // Нога принимает тень
     scene.add(rightLeg);
 
-    scene.scale.set(1.3, 1.3, 1.3); // Увеличиваем размер в 1.5 раза
+    scene.scale.set(1.3, 1.3, 1.3);
 
-    const group = new THREE.Group(); // Группа для центрирования
+    const group = new THREE.Group();
     group.add(head, body, leftArm, rightArm, leftLeg, rightLeg);
     scene.add(group);
 
-    group.position.set(0, 0, 0);
-
-    camera.position.set(0, 1, 3); // Камера смотрит прямо на центр человечка
+    camera.position.set(0, 1, 3);
     camera.lookAt(0, 1, 0);
+
+    // ===== СИСТЕМА ОДЕЖДЫ =====
+    function updateBodyColor(color) {
+        // Сохраняем оригинальный материал при первом изменении
+        if (!materials.originalBody) {
+            materials.originalBody = materials.body.clone();
+        }
+        
+        // Применяем новый цвет
+        materials.body.color.setHex(color);
+        
+        // Сохраняем в localStorage
+        localStorage.setItem('characterClothes', JSON.stringify({
+            bodyColor: color
+        }));
+    }
+
+    // Загрузка сохраненной одежды
+    function loadClothes() {
+        const savedClothes = JSON.parse(localStorage.getItem('characterClothes')) || {};
+        if (savedClothes.bodyColor) {
+            updateBodyColor(savedClothes.bodyColor);
+        }
+    }
+
+    // Проверка обновлений из магазина
+    let lastClothingUpdate = 0;
+
+    function checkClothingUpdates() {
+        const updateTime = localStorage.getItem('clothingUpdateTime');
+        if (!updateTime || updateTime <= lastClothingUpdate) return;
+        
+        const update = JSON.parse(localStorage.getItem('clothingUpdate'));
+        if (!update) return;
+        
+        lastClothingUpdate = updateTime;
+        
+        if (update.type === 'equipClothing') {
+            updateBodyColor(update.color);
+        }
+    }
 
     // Глаза следят за курсором
     document.addEventListener('mousemove', (event) => {
@@ -102,14 +119,19 @@ document.addEventListener("DOMContentLoaded", () => {
         rightEye.position.x = 0.15 + mouseX * 0.1;
     });
 
-    // Анимация
+    // Анимация с проверкой обновлений одежды
     function animate() {
         requestAnimationFrame(animate);
+        checkClothingUpdates();
         renderer.render(scene, camera);
     }
 
+    // Инициализация
+    loadClothes();
     animate();
 });
+
+// Остальные функции (showRandomSpeechBubble и checkForNewMessage) остаются без изменений
 
 
 function showRandomSpeechBubble(message) {

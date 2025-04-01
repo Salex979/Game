@@ -16,7 +16,11 @@ body.dark-theme .shop-container {
     font-size: 60px;
     text-align: center;
     margin-bottom: 30px;
-    text-shadow: 2px 2px 0px black;
+    text-shadow: 
+        2px 2px 0px black,
+        -2px -2px 0px black,
+        2px -2px 0px black,
+        -2px 2px 0px black;
 }
 
 body.dark-theme .shop-title {
@@ -35,27 +39,47 @@ body.dark-theme .shop-title {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     border: 3px solid #E5C185;
+    position: relative;
 }
 
 body.dark-theme .item-card {
+    background-color: rgba(30, 30, 30, 0.9);
     border-color: #74A892;
 }
 
 .item-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.item-image {
+.item-card.purchased {
+    animation: pulse 1s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.character-preview {
     width: 100%;
     height: 200px;
-    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #f5f5f5;
+}
+
+body.dark-theme .character-preview {
+    background-color: #333;
 }
 
 .item-info {
     padding: 15px;
+    text-align: center;
 }
 
 .item-name {
@@ -72,6 +96,7 @@ body.dark-theme .item-name {
     font-size: 20px;
     color: #C7522A;
     font-weight: bold;
+    margin-bottom: 15px;
 }
 
 body.dark-theme .item-price {
@@ -88,7 +113,7 @@ body.dark-theme .item-price {
     cursor: pointer;
     font-family: "Jersey 10", sans-serif;
     font-size: 18px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 body.dark-theme .buy-btn {
@@ -97,14 +122,20 @@ body.dark-theme .buy-btn {
 
 .buy-btn:hover {
     background-color: #b5452a;
+    transform: translateY(-2px);
 }
 
 body.dark-theme .buy-btn:hover {
     background-color: #5a8c7a;
 }
 
+.buy-btn:active {
+    transform: translateY(0);
+}
+
 .equipped {
     position: relative;
+    border-color: #4CAF50 !important;
 }
 
 .equipped::after {
@@ -117,11 +148,16 @@ body.dark-theme .buy-btn:hover {
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 14px;
+    font-family: Arial, sans-serif;
 }
 
-.character-preview {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto;
-    position: relative;
+#character-container {
+    position: absolute;
+    bottom: -50px;
+    right: 20px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -4,75 +4,133 @@ document.addEventListener("DOMContentLoaded", function() {
         window.coinSystem = new CoinSystem();
     }
     
+    // Обновление отображения монет
+    function updateCoinsDisplay() {
+        const coinsDisplay = document.querySelector('.coins-display .coins-count');
+        if (coinsDisplay) {
+            coinsDisplay.textContent = coinSystem.coins;
+        }
+    }
+    updateCoinsDisplay();
+    
     // Загрузка купленных предметов
     const purchasedItems = JSON.parse(localStorage.getItem('purchasedItems')) || {};
     const equippedItem = localStorage.getItem('equippedItem');
     
-    // Инициализация превью человечков
+    // Инициализация превью человечков с Three.js
     initCharacterPreviews();
     
-    // Обработчики для кнопок покупки
+    // Инициализация карточек товаров
+    document.querySelectorAll('.item-card').forEach(card => {
+        const itemId = card.dataset.itemId;
+        
+        // Если предмет уже куплен
+        if (purchasedItems[itemId]) {
+            const btn = card.querySelector('.buy-btn');
+            btn.textContent = 'Надеть';
+            
+            // Если предмет надет
+            if (equippedItem.id === itemId) {
+                card.classList.add('equipped');
+                btn.textContent = 'Надето';
+            }
+        }
+    });
+
+    // Обработка покупок
     document.querySelectorAll('.buy-btn').forEach(button => {
         button.addEventListener('click', function() {
             const card = this.closest('.item-card');
             const itemId = card.dataset.itemId;
             const price = parseInt(card.dataset.price);
-            
-            if (coinSystem.coins >= price) {
-                // Покупка предмета
-                coinSystem.addCoins(-price);
+
+            // Если предмет уже куплен - просто надеваем
+            if (purchasedItems[itemId]) {
+                equipItem(itemId);
+                return;
+            }
+
+            // Покупка нового предмета
+            if (window.coinSystem.coins >= price) {
+                window.coinSystem.addCoins(-price);
+                
                 purchasedItems[itemId] = true;
                 localStorage.setItem('purchasedItems', JSON.stringify(purchasedItems));
                 
-                // Одеваем предмет
                 equipItem(itemId);
                 
-                alert('Покупка успешна!');
+                this.textContent = 'Надето';
+                card.classList.add('purchased');
+                setTimeout(() => card.classList.remove('purchased'), 1000);
             } else {
                 alert('Недостаточно монет!');
             }
         });
     });
+
     
-    // Функция для надевания предмета
+    // Функция для обновления текста кнопки
+    function updateButtonText(card, itemId) {
+        const btn = card.querySelector('.buy-btn');
+        if (purchasedItems[itemId]) {
+            btn.textContent = itemId === equippedItem ? 'Надето' : 'Надеть';
+            btn.addEventListener('click', function() {
+                equipItem(itemId);
+                btn.textContent = 'Надето';
+            });
+        }
+    }
+    
+    // Функция надевания предмета
     function equipItem(itemId) {
-        localStorage.setItem('equippedItem', itemId);
-        
-        // Обновляем отображение на всех карточках
-        document.querySelectorAll('.item-card').forEach(card => {
-            card.classList.remove('equipped');
-            if (card.dataset.itemId === itemId) {
-                card.classList.add('equipped');
-            }
-        });
-        
-        // Здесь можно добавить код для обновления внешнего вида человечка
-        updateCharacterAppearance(itemId);
-    }
-    
-    // Функция для обновления внешнего вида человечка
-    function updateCharacterAppearance(itemId) {
-        // Этот код должен синхронизироваться с person.js
-        // Здесь просто пример - реальная реализация зависит от вашего person.js
-        console.log(`Человечек теперь носит: ${itemId}`);
-    }
-    
-    // Инициализация превью человечков
-    function initCharacterPreviews() {
-        const previews = {
-            'body-green': { body: '#74A892', head: '#ADFF2F' },
-            'body-blue': { body: '#008585', head: '#ADFF2F' },
-            'body-red': { body: '#C7522A', head: '#ADFF2F' },
-            'body-gold': { body: '#E5C185', head: '#ADFF2F' }
+        const colors = {
+            'body-green': 0x74A892,
+            'body-blue': 0x008585,
+            'body-red': 0xC7522A,
+            'body-gold': 0xE5C185
         };
         
-        for (const [id, colors] of Object.entries(previews)) {
+        const equippedItem = { 
+            id: itemId,
+            color: colors[itemId]
+        };
+        localStorage.setItem('equippedItem', JSON.stringify(equippedItem));
+        
+        const update = {
+            type: 'equipClothing',
+            color: colors[itemId],
+            timestamp: Date.now()
+        };
+        localStorage.setItem('clothingUpdate', JSON.stringify(update));
+        localStorage.setItem('clothingUpdateTime', Date.now());
+
+        // Обновляем вид в магазине
+        document.querySelectorAll('.item-card').forEach(card => {
+            card.classList.remove('equipped');
+            const btn = card.querySelector('.buy-btn');
+            if (btn) btn.textContent = 'Надеть';
+            
+            if (card.dataset.itemId === itemId) {
+                card.classList.add('equipped');
+                const btn = card.querySelector('.buy-btn');
+                if (btn) btn.textContent = 'Надето';
+            }
+        });
+    }
+    
+    // Инициализация превью человечков с Three.js
+    function initCharacterPreviews() {
+        const colors = {
+            'body-green': { body: 0x74A892, head: 0xADFF2F },
+            'body-blue': { body: 0x008585, head: 0xADFF2F },
+            'body-red': { body: 0xC7522A, head: 0xADFF2F },
+            'body-gold': { body: 0xE5C185, head: 0xADFF2F }
+        };
+        
+        for (const [id, color] of Object.entries(colors)) {
             const preview = document.getElementById(`preview-${id.split('-')[1]}`);
             if (preview) {
-                // Здесь должна быть логика отрисовки человечка с нужными цветами
-                // Это упрощенный пример - в реальности нужно использовать Three.js как в person.js
-                preview.style.backgroundColor = colors.body;
-                preview.innerHTML = `<div style="width:40px;height:40px;border-radius:50%;background:${colors.head};margin:20px auto;"></div>`;
+                createCharacterPreview(preview, color);
             }
         }
         
@@ -81,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const itemId = card.dataset.itemId;
             if (purchasedItems[itemId]) {
                 const btn = card.querySelector('.buy-btn');
-                btn.textContent = 'Надеть';
+                btn.textContent = itemId === equippedItem ? 'Надето' : 'Надеть';
                 btn.addEventListener('click', function() {
                     equipItem(itemId);
                 });
@@ -92,9 +150,71 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+    
+    // Создание превью персонажа с Three.js
+    function createCharacterPreview(container, colors) {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+        camera.position.set(0, 1, 3);
+        
+        const renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.setSize(150, 150);
+        container.innerHTML = '';
+        container.appendChild(renderer.domElement);
+        
+        // Освещение
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(-1, 1, 3);
+        scene.add(directionalLight);
+        
+        // Создание персонажа
+        const head = new THREE.Mesh(
+            new THREE.SphereGeometry(0.5, 32, 32),
+            new THREE.MeshStandardMaterial({ color: colors.head })
+        );
+        head.position.y = 1.6;
+        
+        const body = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.5, 0.5, 0.9, 32),
+            new THREE.MeshStandardMaterial({ color: colors.body })
+        );
+        body.position.y = 1;
+        
+        const group = new THREE.Group();
+        group.add(head, body);
+        scene.add(group);
+        
+        camera.lookAt(0, 1, 0);
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            group.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+    }
+    
+    // Показ сообщения в облачке
+    function showSpeechBubble(message) {
+        const speechBubble = document.getElementById('speech-bubble');
+        if (!speechBubble) return;
+        
+        speechBubble.textContent = message;
+        speechBubble.style.display = 'block';
+        speechBubble.style.opacity = '1';
+        
+        setTimeout(() => {
+            speechBubble.style.opacity = '0';
+            setTimeout(() => speechBubble.style.display = 'none', 1000);
+        }, 3000);
+    }
 });
 
-// Обработчики для бургер-меню и темы (как в ttt.js)
+// Обработчики для бургер-меню и темы
 document.addEventListener("DOMContentLoaded", function() {
     const burgerMenu = document.querySelector(".burger-menu");
     const menu = document.getElementById("menu");
@@ -113,4 +233,8 @@ document.addEventListener("DOMContentLoaded", function() {
             localStorage.setItem("theme", currentTheme);
         });
     }
+    
+    // Применение сохраненной темы
+    const savedTheme = localStorage.getItem("theme") || "light-theme";
+    document.body.classList.add(savedTheme);
 });
