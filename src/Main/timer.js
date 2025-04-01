@@ -26,7 +26,7 @@ function startTimer() {
     localStorage.removeItem("speechMessage"); // Очищаем предыдущее сообщение
 
     if (document.getElementById("pause-btn")) {
-        document.getElementById("pause-btn").innerText = "Pause";
+        document.getElementById("pause-btn").innerText = "Пауза";
     }
 
     checkTimer();
@@ -39,11 +39,11 @@ function pauseTimer() {
 
     if (!timerPaused) {
         localStorage.setItem("timerStarted", Date.now() - (localStorage.getItem("pausedTime") || 0));
-        if (pauseBtn) pauseBtn.innerText = "Pause";
+        if (pauseBtn) pauseBtn.innerText = "Пауза";
         checkTimer();
     } else {
         localStorage.setItem("pausedTime", Date.now() - localStorage.getItem("timerStarted"));
-        if (pauseBtn) pauseBtn.innerText = "Play";
+        if (pauseBtn) pauseBtn.innerText = "Старт";
     }
 }
 

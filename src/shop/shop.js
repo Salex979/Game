@@ -86,7 +86,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const colors = {
             'body-green': 0x74A892,
             'body-blue': 0x008585,
-            'body-red': 0xC7522A,
+            'body-orange': 0xC7522A,
+            'body-purple': 0x9400D3,
+            'body-red': 0xFF0000,
             'body-gold': 0xE5C185
         };
         
@@ -123,7 +125,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const colors = {
             'body-green': { body: 0x74A892, head: 0xADFF2F },
             'body-blue': { body: 0x008585, head: 0xADFF2F },
-            'body-red': { body: 0xC7522A, head: 0xADFF2F },
+            'body-orange': { body: 0xC7522A, head: 0xADFF2F },
+            'body-purple': { body: 0x9400D3, head: 0xADFF2F },
+            'body-red': { body: 0xFF0000, head: 0xADFF2F },
             'body-gold': { body: 0xE5C185, head: 0xADFF2F }
         };
         

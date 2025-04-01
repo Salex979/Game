@@ -9,30 +9,32 @@
 <body>
     <div id="coins-display">🪙 <span class="coins-count">0</span></div>
     <div class="theme-switch" id="theme-switch">
-        Change mode
+        Тема
     </div>
     <div class="container">
         <h1 class="container-title">Break Time  Games</h1>
         <ul class="game-list">
-            <li><a href="/src/Snake/snake.html">Zmeika</a></li>
-            <li><a href="/src/Tetris/tetris.html">Tetris</a></li>
+            <li><a href="/src/Snake/snake.html">Змейка</a></li>
+            <li><a href="/src/Tetris/tetris.html">Тетрис</a></li>
             <li><a href="/src/FlappyBird/FlappyBird.html">Flappy Bird</a></li>
-            <li><a href="/src/TTT/ttt.html">Tic-Tac-Toe</a></li>
+            <li><a href="/src/TTT/ttt.html">Крестики-нолики</a></li>
             <li><a href="/src/2048/2048.html">2048</a></li>
         </ul>
     </div>
     <div class="timer-container">
-        <label class="timer-text" for="timer">Set timer (in minutes):</label>
+        <label class="timer-text" for="timer">Установить таймер (в минутах):</label>
         <input type="number" id="timer" min="1" value="1">
         <div class="timer-btns">
-            <button id="start-btn">Start</button>
-            <button id="pause-btn">Pause</button>
+            <button id="start-btn">Старт</button>
+            <button id="pause-btn">Пауза</button>
         </div>
         <p id="time-left"></p>
     </div>
-    <div id="character-container">
-        <div id="speech-bubble"></div>
-    </div>
+    <a href="/src/shop/character-shop.html">
+        <div id="character-container">
+            <div id="speech-bubble"></div>
+        </div>
+    </a>
     <script src="main.js"></script>
     <script src="three.min.js"></script>
     <script src="person.js"></script>

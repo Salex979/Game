@@ -21,7 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // Материалы персонажа (теперь доступны для изменения)
     const materials = {
         head: new THREE.MeshStandardMaterial({ color: 0xADFF2F }),
-        body: new THREE.MeshStandardMaterial({ color: 0x00A2E8 }),
+        body: new THREE.MeshStandardMaterial({ 
+            color: 0x00A2E8,
+            roughness: 0.7,
+            metalness: 0.1
+        }),
         limb: new THREE.MeshStandardMaterial({ color: 0xADFF2F }),
         eyes: new THREE.MeshStandardMaterial({ color: 0x000000 }),
         originalBody: null // Для сохранения оригинального цвета
@@ -90,7 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Загрузка сохраненной одежды
     function loadClothes() {
         const savedClothes = JSON.parse(localStorage.getItem('characterClothes')) || {};
-        if (savedClothes.bodyColor) {
+        if (savedClothes.bodyColor === 'striped') {
+            updateBodyColor('striped');
+        } else {
             updateBodyColor(savedClothes.bodyColor);
         }
     }
@@ -130,9 +136,6 @@ document.addEventListener("DOMContentLoaded", () => {
     loadClothes();
     animate();
 });
-
-// Остальные функции (showRandomSpeechBubble и checkForNewMessage) остаются без изменений
-
 
 function showRandomSpeechBubble(message) {
     const RandomSpeechBubble = document.getElementById("speech-bubble");

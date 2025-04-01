@@ -180,9 +180,9 @@ function generateFood() {
 
 // Обновление счётчиков
 function updateCounters() {
-      applesCounter.innerText = "Apples: " + applesEaten; // Обновляем количество яблок
+      applesCounter.innerText = "Яблоки: " + applesEaten; // Обновляем количество яблок
       score = applesEaten * 10; // Счёт равен количеству яблок умноженному на 10
-      scoreBoard.innerText = "Score: " + score; // Обновляем рейтинг
+      scoreBoard.innerText = "Счет: " + score; // Обновляем рейтинг
 
       checkCoinReward();
   
@@ -209,7 +209,7 @@ function endGame() {
 // Добавление счёта в рейтинг
 function addScoreToLeaderboard(score) {
     const listItem = document.createElement("li"); // Создаём новый элемент списка
-    listItem.textContent = `Player: ${score} points`; // Выводим строку с результатом
+    listItem.textContent = `Игрок: ${score} очков`; // Выводим строку с результатом
     scoreList.appendChild(listItem); // Добавляем результат в список лидеров
 }
 

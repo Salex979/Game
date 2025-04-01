@@ -1,3 +1,7 @@
+body {
+    overflow-y: auto;
+}
+
 .shop-container {
     max-width: 1000px;
     margin: 70px auto 0;
@@ -152,9 +156,9 @@ body.dark-theme .buy-btn:hover {
 }
 
 #character-container {
-    position: absolute;
+    position: fixed;
     bottom: -50px;
-    right: 20px;
+    right: -5px;
     width: 200px;
     height: 200px;
     display: flex;

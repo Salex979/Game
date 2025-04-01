@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
       margin: 0;
@@ -12,7 +12,7 @@ ul {
 
 /* Общие стили */
 body {
-      font-family: "Jersey 10", sans-serif;
+      font-family: "Press Start 2P", system-ui;
       font-weight: 400;
       font-style: normal;
       margin: 0;
@@ -98,7 +98,7 @@ body.dark-theme .menu {
       color: white;
       text-decoration: none;
       margin: 15px 0;
-      font-size: 20px;
+      font-size: 14px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -115,8 +115,8 @@ body.dark-theme .menu {
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 30px;
-
+      margin-top: 100px;
+      gap: 30px;
       padding: 0 20px;
 }
 
@@ -135,7 +135,7 @@ body.dark-theme .menu {
 /* Название колонок */
 .column-title {
       color: white;
-      font-size: 40px;
+      font-size: 20px;
       text-shadow:
             2px 2px 0px black,
             -2px -2px 0px black,
@@ -145,8 +145,8 @@ body.dark-theme .menu {
 
 /* Кнопки заметок и рейтинга */
 .column-btn {
-      font-family: "Jersey 10", sans-serif;
-      font-size: 16px;
+      font-family: "Press Start 2P", system-ui;
+      font-size: 10px;
       background-color: white;
       color: #C7522A;
       padding: 10px 20px;
@@ -178,7 +178,7 @@ body.dark-theme .note-input {
 
 .note {
       color: white;
-      font-size: 20px;
+      font-size: 10px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -212,12 +212,13 @@ body.dark-theme .note-input {
 
 .game-section-title {
       color: white;
-      font-size: 100px;
+      font-size: 64px;
       text-shadow:
             2px 2px 0px #C7522A,
             -2px -2px 0px #C7522A,
             2px -2px 0px #C7522A,
             -2px 2px 0px #C7522A;
+      margin-bottom: 20px;
 }
 
 body.dark-theme .game-section-title {
@@ -237,7 +238,7 @@ body.dark-theme .game-section-title {
 
 .next-piece-title {
       color: white;
-      font-size: 20px;
+      font-size: 14px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -247,7 +248,7 @@ body.dark-theme .game-section-title {
 
 .game-section-text {
       color: white;
-      font-size: 20px;
+      font-size: 14px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -274,7 +275,7 @@ body.dark-theme canvas {
 /* Все о рейтинге */
 #scoreList {
       color: white;
-      font-size: 20px;
+      font-size: 10px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -284,7 +285,7 @@ body.dark-theme canvas {
 
 .game-over {
       color: white;
-      font-size: 30px;
+      font-size: 18px;
       text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -306,7 +307,7 @@ body.dark-theme canvas {
 }
 
 .column-score-column {
-      width: 400px;
+      width: 300px;
       padding-left: 100px;
       padding-top: 170px;
 }
@@ -331,7 +332,7 @@ body.dark-theme canvas {
       padding: 10px 15px;
       border-radius: 10px;
       box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-      font-size: 14px;
+      font-size: 10px;
 
       display: none; /* Скрыто по умолчанию */
       white-space: nowrap;
@@ -441,3 +442,7 @@ body.dark-theme #coins-display {
 .coin-animation {
       animation: coin-pulse 0.8s;
 }
+
+.coins-count{
+      font-size: 14px;
+  }

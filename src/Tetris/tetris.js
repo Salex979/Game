@@ -155,7 +155,7 @@ function clearLines() {
 }
 
 function updateScore() {
-    scoreDisplay.textContent = `Score: ${score}`;
+    scoreDisplay.textContent = `Счет: ${score}`;
 }
 
 function draw() {

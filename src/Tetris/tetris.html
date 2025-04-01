@@ -16,26 +16,27 @@
     </div>
 
     <div class="menu" id="menu">
-        <a href="#" id="theme-toggle">Change mode</a>
-        <a href="/src/Main/main.html">Main</a>
+        <a href="#" id="theme-toggle">Тема</a>
+        <a href="/src/Main/main.html">Главная</a>
+        <a href="/src/shop/character-shop.html">Магазин</a>
     </div>
 
     <div id="main-container">
         <div class="column note-column">
-            <h3 class="column-title">Notes</h3>
-            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
-            <button class="column-btn" id="add-note-btn">Add note</button>
+            <h3 class="column-title">Заметки</h3>
+            <textarea id="note-input" class="note-input" placeholder="Введите новую заметку..."></textarea>
+            <button class="column-btn" id="add-note-btn">Добавить</button>
             <div class="note-list" id="note-list"></div>
         </div>
 
         <div class="game-section">
-            <h1 class="game-section-title">Tetris</h1>
+            <h1 class="game-section-title">Тетрис</h1>
             <div class="game-section-text">
-                <div id="scoreBoard">Score: 0</div>
+                <div id="scoreBoard">Счет: 0</div>
             </div>
             <div class="game">
                 <div id="next-piece-container">
-                    <h3>Next figure:</h3>
+                    <h3>Новая фигура:</h3>
                     <canvas id="next-piece-canvas" width="80" height="80"></canvas>
                 </div>
                 <canvas id="gameCanvas" width="200" height="400"></canvas>
@@ -47,15 +48,16 @@
         <button id="pause-button" class="pause-button">Пауза</button> 
 
         <div class="column-score-column">
-            <h3 class="column-title">Rating</h3>
+            <h3 class="column-title">Рейтинг</h3>
             <ul id="scoreList"></ul>
-            <button class="column-btn" id="clearButton">Clear rating</button>
+            <button class="column-btn" id="clearButton">Очистить</button>
             
         </div>
         <div id="character-container">
             <div id="speech-bubble"></div>
         </div>
     </div>
+
 
     <script src="tetris.js"></script> 
     <script src="/src/Main/three.min.js"></script>

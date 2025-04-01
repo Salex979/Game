@@ -16,32 +16,33 @@
     </div>
 
     <div class="menu" id="menu">
-        <a href="#" id="theme-toggle">Change mode</a>
-        <a href="/src/Main/main.html">Main</a>
+        <a href="#" id="theme-toggle">Тема</a>
+        <a href="/src/Main/main.html">Главная</a>
+        <a href="/src/shop/character-shop.html">Магазин</a>
     </div>
 
     <div id="main-container">
         <div class="column note-column">
-            <h3 class="column-title">Notes</h3>
-            <textarea id="note-input" class="note-input" placeholder="Enter a new note..."></textarea>
-            <button class="column-btn" id="add-note-btn">Add note</button>
+            <h3 class="column-title">Заметки</h3>
+            <textarea id="note-input" class="note-input" placeholder="Введите новую заметку..."></textarea>
+            <button class="column-btn" id="add-note-btn">Добавить</button>
             <div class="note-list" id="note-list"></div>
         </div>
 
         <div class="game-section">
-            <h1 class="game-section-title">Zmeika</h1>
+            <h1 class="game-section-title">Змейка</h1>
             <div class="game-section-text">
-                <div id="scoreBoard">Score: 0</div>
-                <div id="applesCounter">Apples: 0</div>
+                <div id="scoreBoard">Счет: 0</div>
+                <div id="applesCounter">Ябкоки: 0</div>
             </div>
             <canvas id="gameCanvas" width="400" height="400"></canvas>
             <div id="recordMessage" style="display: none;"></div>
         </div>
 
         <div class="column score-column">
-            <h3 class="column-title">Rating</h3>
+            <h3 class="column-title">Рейтинг</h3>
             <ul id="scoreList"></ul>
-            <button class="column-btn" id="clearButton">Clear rating</button>
+            <button class="column-btn" id="clearButton">Очистить</button>
         </div>
         <div id="character-container">
             <div id="speech-bubble"></div>

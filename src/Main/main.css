@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jersey+10&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -9,8 +8,13 @@ button {
     cursor: pointer;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 body {
-    font-family: "Jersey 10", sans-serif;
+    font-family: "Press Start 2P", system-ui;
     font-weight: 400;
     font-style: normal;
     text-align: center;
@@ -33,15 +37,15 @@ body.dark-mode {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 220px;
+    margin-top: 280px;
 }
 .container-title {
-    font-size: 120px;
+    font-size: 55px;
     color: white;
     text-shadow:
         4px 4px 0px #C7522A,
@@ -59,17 +63,17 @@ body.dark-mode .container-title {
 }
 
 .game-list {
-    margin-top: 30px;
+    margin-top: 60px;
     list-style: none;
     padding: 0;
 }
 .game-list li {
-    margin: 10px 0;
+    margin: 20px 0;
 }
 .game-list a {
     text-decoration: none;
     color: white;
-    font-size: 28px;
+    font-size: 18px;
     text-shadow:
             1px 1px 0px black,
             -1px -1px 0px black,
@@ -90,7 +94,7 @@ body.dark-mode .container-title {
 }
 
 .timer-text {
-    font-size: 20px;
+    font-size: 12px;
     color: white;
     text-shadow:
             1px 1px 0px black,
@@ -122,12 +126,12 @@ body.dark-mode #timer {
 
 button {
     margin-top: 5px;
-    font-family: "Jersey 10", sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     background-color: white;
     color: #C7522A;
-    padding: 5px 10px;
+    padding: 7px 10px;
     border: #C7522A 3px solid;
+    font-family: "Press Start 2P", system-ui;
 }
 
 body.dark-mode button {
@@ -136,7 +140,7 @@ body.dark-mode button {
 }
 
 #time-left {
-    font-size: 32px;
+    font-size: 16px;
     color: white;
     text-shadow:
             1px 1px 0px black,
@@ -150,7 +154,7 @@ body.dark-mode button {
     top: 10px;
     left: 10px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     color: white;
     text-shadow:
             1px 1px 0px black,
@@ -179,7 +183,7 @@ body.dark-mode button {
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    font-size: 14px;
+    font-size: 10px;
     
     display: none; /* Скрыто по умолчанию */
     white-space: nowrap;
@@ -204,6 +208,10 @@ body.dark-mode button {
     min-width: 100px;
     text-align: center;
     border: 2px solid #E5C185;
+}
+
+.coins-count{
+    font-size: 14px;
 }
 
 #coins-display:hover {
