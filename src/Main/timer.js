@@ -43,7 +43,7 @@ function pauseTimer() {
         checkTimer();
     } else {
         localStorage.setItem("pausedTime", Date.now() - localStorage.getItem("timerStarted"));
-        if (pauseBtn) pauseBtn.innerText = "Старт";
+        if (pauseBtn) pauseBtn.innerText = "Продолжить";
     }
 }
 
