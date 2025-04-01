@@ -1,4 +1,4 @@
-console.log("knbjsnbisnb");
+console.log("Work");
 
 // Переключение темы
 document.addEventListener("DOMContentLoaded", () => {
