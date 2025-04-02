@@ -260,9 +260,6 @@ body.dark-theme .game-section-title {
     margin: 0 auto;
 }
 
-body.dark-theme canvas {
-    border: 8px solid #008585;
-}
 
 #recordPanel {
     color: white;

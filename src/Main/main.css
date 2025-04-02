@@ -190,7 +190,7 @@ body.dark-mode button {
     transition: opacity 1s ease; /* Плавное появление */
 }
 
-body.dark-theme #speech-bubble {
+body.dark-mode #speech-bubble {
     color: black;
 }
 
@@ -213,6 +213,10 @@ body.dark-theme #speech-bubble {
     border: 2px solid #E5C185;
 }
 
+body.dark-mode #coins-display {
+    border: 2px solid #74A892;
+}
+
 .coins-count{
     font-size: 14px;
 }
@@ -220,11 +224,6 @@ body.dark-theme #speech-bubble {
 #coins-display:hover {
     background-color: white;
     transition: all 0.3s ease;
-}
-
-body.dark-theme #coins-display {
-    border-color: #74A892;
-    background-color: inherit;
 }
 
 #coins-display .coin-icon {

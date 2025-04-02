@@ -268,10 +268,6 @@ body.dark-theme .game-section-title {
       margin-left: 20px;
 }
 
-body.dark-theme canvas {
-      border: 8px solid #008585;
-}
-
 /* Все о рейтинге */
 #scoreList {
       color: white;
