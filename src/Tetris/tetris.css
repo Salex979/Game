@@ -10,6 +10,11 @@ ul {
       padding: 0;
 }
 
+a {
+      text-decoration: none;
+      color: black;
+}
+
 /* Общие стили */
 body {
       font-family: "Press Start 2P", system-ui;

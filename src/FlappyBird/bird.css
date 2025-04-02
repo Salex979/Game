@@ -10,6 +10,11 @@ ul {
       padding: 0;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 body {
     font-family: "Press Start 2P", system-ui;
       font-weight: 400;
