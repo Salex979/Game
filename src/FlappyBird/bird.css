@@ -112,7 +112,7 @@ body.dark-theme .menu {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-top: 80px;  */
+    margin-top: 50px; 
     gap: 30px; 
     padding: 0 20px;
 }
@@ -137,6 +137,7 @@ body.dark-theme .menu {
       -2px -2px 0px black, 
       2px -2px 0px black, 
       -2px 2px 0px black;
+    
 }
 
 .column-btn {
@@ -206,6 +207,7 @@ body.dark-theme .note-input {
       -2px -2px 0px #C7522A, 
       2px -2px 0px #C7522A, 
       -2px 2px 0px #C7522A;
+    margin-bottom: 20px;
 }
 
 body.dark-theme .game-section-title {
@@ -313,6 +315,10 @@ body.dark-theme canvas {
     white-space: nowrap;
     opacity: 0; /* Начально скрыто */
     transition: opacity 1s ease; /* Плавное появление */
+}
+
+body.dark-theme #speech-bubble {
+    color: black;
 }
 
 #coins-display {
