@@ -340,6 +340,10 @@ body.dark-theme canvas {
       transition: opacity 1s ease; /* Плавное появление */
 }
 
+body.dark-theme #speech-bubble {
+      color: black;
+  }
+
 #coins-display {
     position: fixed;
     top: 20px;
