@@ -192,7 +192,7 @@ function restartGame() {
     bird.y = birdY;
     birdVelocity = 0;
     gamePaused = false;
-    document.getElementById("scoreText").innerText = 'Score: ' + score;
+    document.getElementById("scoreText").innerText = 'Счет: ' + score;
     gameLoop();
 }
 

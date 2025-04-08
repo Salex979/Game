@@ -357,6 +357,20 @@ body.dark-theme #coins-display {
     background-color: inherit;
 }
 
+.coin-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: gold;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 24px;
+      z-index: 1001;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+}
 .coin-message.show {
       opacity: 1;
 }

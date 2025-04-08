@@ -16,8 +16,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             if (response.ok) {
-                chrome.storage.local.set({ token: data.token, showWelcome: true });
-                chrome.tabs.create({ url: "/src/Main/main.html" });
+                chrome.storage.local.set({ 
+                    token: data.token, 
+                    showWelcome: true,
+                    username: username 
+                });
+                chrome.tabs.create({ url: "/src/Main/main.html?welcome=true" });
             } else {
                 document.getElementById("status").textContent = "Ошибка: " + data.message;
             }
