@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,16 @@ button {
 a {
     text-decoration: none;
     color: black;
+}
+
+.nickname {
+    font-size: 18px;
+    color: #ffff;
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
 }
 
 body {
@@ -44,6 +55,7 @@ body.dark-mode {
     align-items: center;
     margin-top: 290px;
 }
+
 .container-title {
     font-size: 64px;
     color: white;
@@ -55,11 +67,11 @@ body.dark-mode {
 }
 
 body.dark-mode .container-title {
-    text-shadow: 
-      4px 4px 0px #74A892,  
-      -4px -4px 0px #74A892, 
-      4px -4px 0px #74A892, 
-      -4px 4px 0px #74A892;
+    text-shadow:
+        4px 4px 0px #74A892,
+        -4px -4px 0px #74A892,
+        4px -4px 0px #74A892,
+        -4px 4px 0px #74A892;
 }
 
 .game-list {
@@ -67,18 +79,20 @@ body.dark-mode .container-title {
     list-style: none;
     padding: 0;
 }
+
 .game-list li {
     margin: 25px 0;
 }
+
 .game-list a {
     text-decoration: none;
     color: white;
     font-size: 18px;
     text-shadow:
-            1px 1px 0px black,
-            -1px -1px 0px black,
-            1px -1px 0px black,
-            -1px 1px 0px black;
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
 }
 
 .timer-container {
@@ -97,10 +111,10 @@ body.dark-mode .container-title {
     font-size: 12px;
     color: white;
     text-shadow:
-            1px 1px 0px black,
-            -1px -1px 0px black,
-            1px -1px 0px black,
-            -1px 1px 0px black;
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
 }
 
 #timer {
@@ -144,10 +158,10 @@ body.dark-mode button {
     font-size: 14px;
     color: white;
     text-shadow:
-            1px 1px 0px black,
-            -1px -1px 0px black,
-            1px -1px 0px black,
-            -1px 1px 0px black;
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
 }
 
 .theme-switch {
@@ -158,10 +172,10 @@ body.dark-mode button {
     font-size: 14px;
     color: white;
     text-shadow:
-            1px 1px 0px black,
-            -1px -1px 0px black,
-            1px -1px 0px black,
-            -1px 1px 0px black;
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        1px -1px 0px black,
+        -1px 1px 0px black;
 }
 
 #character-container {
@@ -177,7 +191,8 @@ body.dark-mode button {
 
 #speech-bubble {
     position: absolute;
-    bottom: 190px; /* Располагаем над человечком */
+    bottom: 190px;
+    /* Располагаем над человечком */
     left: 50%;
     transform: translateX(-50%);
     background: white;
@@ -185,10 +200,13 @@ body.dark-mode button {
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     font-size: 10px;
-    display: none; /* Скрыто по умолчанию */
+    display: none;
+    /* Скрыто по умолчанию */
     white-space: nowrap;
-    opacity: 0; /* Начально скрыто */
-    transition: opacity 1s ease; /* Плавное появление */
+    opacity: 0;
+    /* Начально скрыто */
+    transition: opacity 1s ease;
+    /* Плавное появление */
 }
 
 body.dark-mode #speech-bubble {
@@ -205,7 +223,7 @@ body.dark-mode #speech-bubble {
     padding: 8px 15px;
     background-color: inherit;
     z-index: 1000;
-    text-shadow: 
+    text-shadow:
         1px 1px 1px black,
         -1px -1px 1px black;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -218,7 +236,7 @@ body.dark-mode #coins-display {
     border: 2px solid #74A892;
 }
 
-.coins-count{
+.coins-count {
     font-size: 14px;
 }
 
@@ -232,9 +250,17 @@ body.dark-mode #coins-display {
 }
 
 @keyframes coin-pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 .coin-animation {
@@ -243,53 +269,56 @@ body.dark-mode #coins-display {
 
 /* Фон для модального окна */
 .modal {
-    display: none; /* По умолчанию скрыто */
+    display: none;
+    /* По умолчанию скрыто */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Затемнение фона */
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* Убедитесь, что модальное окно поверх всего */
+    z-index: 10000;
+    /* Убедитесь, что модальное окно поверх всего */
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10000;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-content {
-  background-color: #F0DAA5;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background-color: #F0DAA5;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .modal-content {
-  background-color: #004343;
-  color: #74A892;
+    background-color: #004343;
+    color: #74A892;
 }
 
 .survey-form {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 .form-group {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .modal-title {
@@ -298,37 +327,38 @@ body.dark-mode .modal-content {
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 14px;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
 }
 
 .form-group select {
-  width: 80%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 3px solid #C7522A;
-  font-family: "Press Start 2P", system-ui;
-  font-size: 10px;
+    width: 80%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 3px solid #C7522A;
+    font-family: "Press Start 2P", system-ui;
+    font-size: 10px;
 }
 
 body.dark-mode .form-group select {
-  border-color: #74A892;
+    border-color: #74A892;
 }
 
-#submit-survey, #close-modal {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 10px;
-  cursor: pointer;
+#submit-survey,
+#close-modal {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 10px;
+    cursor: pointer;
 }
 
 .recommendations {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: none;
 }
 
 .recommendations-title {
@@ -340,5 +370,5 @@ body.dark-mode .form-group select {
 }
 
 body.dark-mode .recommendations {
-  background-color: rgba(116, 168, 146, 0.2);
+    background-color: rgba(116, 168, 146, 0.2);
 }

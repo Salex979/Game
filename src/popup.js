@@ -6,26 +6,28 @@ document.addEventListener("DOMContentLoaded", function () {
         loginBtn.addEventListener("click", async () => {
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
-
+        
             const response = await fetch("http://localhost:3000/api/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password })
             });
-
+        
             const data = await response.json();
-
+        
             if (response.ok) {
                 chrome.storage.local.set({ 
                     token: data.token, 
                     showWelcome: true,
-                    username: username 
+                    username: data.user  // 👈 сохраняем username с тегом, типа Alex#0001
                 });
-                chrome.tabs.create({ url: "/src/Main/main.html?welcome=true" });
+                chrome.tabs.create({ 
+                    url: "/src/Main/main.html?welcome=true&username=" + encodeURIComponent(data.user)
+                });                
             } else {
                 document.getElementById("status").textContent = "Ошибка: " + data.message;
             }
-        });
+        });        
     }
 
     if (registerBtn) {
