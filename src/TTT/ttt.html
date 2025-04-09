@@ -21,6 +21,14 @@
         <a href="/src/shop/character-shop.html">Магазин</a>
     </div>
 
+    <div class="mode-selection">
+        <label class="modename">Выберите режим:</label>
+        <select id="gameMode">
+            <option value="human">С другом</option>
+            <option value="ai" selected>С компьютером</option>
+        </select>
+    </div>
+    
     <div id="main-container">
         <div class="column note-column">
             <h3 class="column-title">Заметки</h3>
@@ -28,7 +36,7 @@
             <button class="column-btn" id="add-note-btn">Добавить</button>
             <div class="note-list" id="note-list"></div>
         </div>
-
+        
         <div class="game-section">
             <h1 class="game-section-title">Крестики-Нолики с ИИ</h1>
             <table id="gameBoard">
